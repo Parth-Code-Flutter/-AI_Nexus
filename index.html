@@ -183,31 +183,63 @@
     <!-- Category Filters -->
     <div class="relative z-10 pb-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-wrap justify-center gap-3 animate-fade-in" style="animation-delay: 0.3s;"
-                id="categoryContainer">
-                <button onclick="filterTools('all')"
-                    class="category-btn active px-6 py-2.5 rounded-full text-sm font-medium bg-brand-600 text-white shadow-lg shadow-brand-500/25 transition-all hover:transform hover:-translate-y-1 hover:shadow-xl ring-2 ring-brand-500 ring-offset-2 ring-offset-[#0f172a]">All
-                    Tools</button>
-                <button onclick="filterTools('image')"
-                    class="category-btn px-6 py-2.5 rounded-full text-sm font-medium bg-dark-card border border-dark-border text-slate-300 hover:bg-brand-500/10 hover:text-brand-500 hover:border-brand-500/50 transition-all hover:transform hover:-translate-y-1">Image</button>
-                <button onclick="filterTools('video')"
-                    class="category-btn px-6 py-2.5 rounded-full text-sm font-medium bg-dark-card border border-dark-border text-slate-300 hover:bg-brand-500/10 hover:text-brand-500 hover:border-brand-500/50 transition-all hover:transform hover:-translate-y-1">Video</button>
-                <button onclick="filterTools('thumbnail')"
-                    class="category-btn px-6 py-2.5 rounded-full text-sm font-medium bg-dark-card border border-dark-border text-slate-300 hover:bg-brand-500/10 hover:text-brand-500 hover:border-brand-500/50 transition-all hover:transform hover:-translate-y-1">Thumbnail</button>
-                <button onclick="filterTools('voice')"
-                    class="category-btn px-6 py-2.5 rounded-full text-sm font-medium bg-dark-card border border-dark-border text-slate-300 hover:bg-brand-500/10 hover:text-brand-500 hover:border-brand-500/50 transition-all hover:transform hover:-translate-y-1">Voice
-                    & Audio</button>
-                <button onclick="filterTools('script')"
-                    class="category-btn px-6 py-2.5 rounded-full text-sm font-medium bg-dark-card border border-dark-border text-slate-300 hover:bg-brand-500/10 hover:text-brand-500 hover:border-brand-500/50 transition-all hover:transform hover:-translate-y-1">Script
-                    & Text</button>
-                <button onclick="filterTools('social')"
-                    class="category-btn px-6 py-2.5 rounded-full text-sm font-medium bg-dark-card border border-dark-border text-slate-300 hover:bg-brand-500/10 hover:text-brand-500 hover:border-brand-500/50 transition-all hover:transform hover:-translate-y-1">Social
-                    Media</button>
-                <button onclick="filterTools('productivity')"
-                    class="category-btn px-6 py-2.5 rounded-full text-sm font-medium bg-dark-card border border-dark-border text-slate-300 hover:bg-brand-500/10 hover:text-brand-500 hover:border-brand-500/50 transition-all hover:transform hover:-translate-y-1">Productivity</button>
-                <button onclick="filterTools('free')"
-                    class="category-btn px-6 py-2.5 rounded-full text-sm font-medium bg-dark-card border border-dark-border text-slate-300 hover:bg-green-500/10 hover:text-green-400 hover:border-green-500/50 transition-all hover:transform hover:-translate-y-1"><i
-                        class="fa-solid fa-gift mr-2"></i>100% Free</button>
+            <div class="flex justify-center animate-fade-in" style="animation-delay: 0.3s;">
+                <!-- Glass Dock Container -->
+                <div class="inline-flex items-center p-1.5 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-xl shadow-2xl overflow-x-auto max-w-full scrollbar-hide"
+                    id="categoryContainer">
+
+                    <button onclick="filterTools('all')"
+                        class="category-btn group flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 bg-brand-600 text-white shadow-lg shadow-brand-500/20 active-tab">
+                        <i class="fa-solid fa-layer-group"></i> <span class="whitespace-nowrap">All Tools</span>
+                    </button>
+
+                    <div class="w-px h-6 bg-white/5 mx-1 hidden sm:block"></div>
+
+                    <button onclick="filterTools('image')"
+                        class="category-btn group flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300">
+                        <i class="fa-solid fa-image group-hover:text-pink-400 transition-colors"></i> <span
+                            class="whitespace-nowrap">Image</span>
+                    </button>
+
+                    <button onclick="filterTools('video')"
+                        class="category-btn group flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300">
+                        <i class="fa-solid fa-video group-hover:text-blue-400 transition-colors"></i> <span
+                            class="whitespace-nowrap">Video</span>
+                    </button>
+
+                    <button onclick="filterTools('voice')"
+                        class="category-btn group flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300">
+                        <i class="fa-solid fa-microphone-lines group-hover:text-purple-400 transition-colors"></i> <span
+                            class="whitespace-nowrap">Voice</span>
+                    </button>
+
+                    <button onclick="filterTools('script')"
+                        class="category-btn group flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300">
+                        <i class="fa-solid fa-pen-nib group-hover:text-orange-400 transition-colors"></i> <span
+                            class="whitespace-nowrap">Text</span>
+                    </button>
+
+                    <button onclick="filterTools('social')"
+                        class="category-btn group flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300">
+                        <i class="fa-brands fa-instagram group-hover:text-pink-500 transition-colors"></i> <span
+                            class="whitespace-nowrap">Social</span>
+                    </button>
+
+                    <button onclick="filterTools('productivity')"
+                        class="category-btn group flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300">
+                        <i class="fa-solid fa-bolt group-hover:text-yellow-400 transition-colors"></i> <span
+                            class="whitespace-nowrap">Productivity</span>
+                    </button>
+
+                    <div class="w-px h-6 bg-white/5 mx-1 hidden sm:block"></div>
+
+                    <button onclick="filterTools('free')"
+                        class="category-btn group flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-green-400/90 hover:text-green-300 hover:bg-green-500/10 transition-all duration-300">
+                        <i class="fa-solid fa-gift group-hover:rotate-12 transition-transform"></i> <span
+                            class="whitespace-nowrap">Free</span>
+                    </button>
+
+                </div>
             </div>
         </div>
     </div>
