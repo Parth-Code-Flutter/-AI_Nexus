@@ -677,17 +677,22 @@
 
             // Update buttons
             document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active', 'bg-brand-600', 'text-white', 'shadow-lg', 'ring-2', 'ring-brand-500');
-                btn.classList.add('bg-dark-card', 'text-slate-300');
+                // Remove active classes
+                btn.classList.remove('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/20');
+                // Add inactive classes
+                btn.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-white/5');
 
-                // Add hover classes back if they were removed
-                btn.classList.add('hover:bg-brand-500/10', 'hover:text-brand-500');
+                // Special handling for 'Free' button reset
+                if (btn.innerText.includes('Free')) {
+                    btn.classList.add('text-green-400/90', 'hover:bg-green-500/10');
+                    btn.classList.remove('text-slate-400');
+                }
             });
 
             // Style active button
-            const activeBtn = event.target;
-            activeBtn.classList.remove('bg-dark-card', 'text-slate-300', 'hover:bg-brand-500/10', 'hover:text-brand-500');
-            activeBtn.classList.add('active', 'bg-brand-600', 'text-white', 'shadow-lg', 'ring-2', 'ring-brand-500', 'ring-offset-2', 'ring-offset-[#0f172a]');
+            const activeBtn = event.currentTarget; // Safer than event.target for button with icon
+            activeBtn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-white/5', 'text-green-400/90', 'hover:bg-green-500/10');
+            activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/20');
 
             filterAndRender();
         }
