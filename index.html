@@ -682,52 +682,100 @@
             ];
 
             const toolsGrid = document.getElementById('toolsGrid');
+            const trendingGrid = document.getElementById('trendingGrid');
+            const trendingSection = document.getElementById('trendingSection');
             const searchInput = document.getElementById('searchInput');
             let currentFilter = 'all';
 
+            // High Value Tools to pinning to Trending
+            const trendingIds = ['Metricool', 'Hypefury', 'Descript', 'Copy.ai', 'ElevenLabs', 'Synthesia', 'Flick'];
+
+            function createCard(tool, index) {
+                const card = document.createElement('div');
+                // Add golden border for trending tools
+                const isTrending = trendingIds.includes(tool.name);
+                const borderClass = isTrending ? 'border-orange-500/30 shadow-orange-500/10' : 'border-white/5';
+
+                card.className = `glass-card rounded-2xl p-6 hover:bg-slate-800/80 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-500/10 group cursor-pointer border-t ${borderClass}`;
+                card.onclick = () => window.open(tool.url, '_blank');
+                card.style.animation = `fadeIn 0.5s ease-out forwards ${index * 0.05}s`;
+                card.style.opacity = '0';
+
+                const tagsHtml = tool.tags.map(tag =>
+                    `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-500/10 text-brand-400 border border-brand-500/20">${tag}</span>`
+                ).join('');
+
+                // Hot Badge
+                const hotBadge = isTrending ?
+                    `<div class="absolute top-0 right-0 -mt-2 -mr-2 bg-gradient-to-r from-orange-500 to-pink-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-white/10 flex items-center gap-1 z-10">
+                        <i class="fa-solid fa-fire-flame-curved"></i> HOT
+                    </div>` : '';
+
+                card.innerHTML = `
+                    ${hotBadge}
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-center text-2xl ${tool.color} group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid ${tool.icon}"></i>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-brand-500 transition-colors">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-400 transition-colors">${tool.name}</h3>
+                    <p class="text-slate-400 text-sm mb-4 line-clamp-2 h-10 leading-relaxed">${tool.description}</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        ${tagsHtml}
+                    </div>
+                `;
+                return card;
+            }
+
             function renderTools(toolsToRender) {
                 toolsGrid.innerHTML = '';
+                if (trendingGrid) trendingGrid.innerHTML = '';
 
+                // Handle No Results
                 if (toolsToRender.length === 0) {
                     document.getElementById('noResults').classList.remove('hidden');
+                    if (trendingSection) trendingSection.classList.add('hidden');
+                    const mainTitle = document.getElementById('mainGridTitle');
+                    if (mainTitle) mainTitle.parentElement.style.display = 'none';
+                    return;
+                }
+
+                document.getElementById('noResults').classList.add('hidden');
+
+                // Strategy:
+                // If viewing "All" AND searching is empty, show Trending Section separately.
+
+                if (currentFilter === 'all' && searchInput.value === '' && trendingSection) {
+                    trendingSection.classList.remove('hidden');
+                    const mainTitle = document.getElementById('mainGridTitle');
+                    if (mainTitle) {
+                        mainTitle.innerText = 'All Tools';
+                        mainTitle.parentElement.style.display = 'flex';
+                    }
+
+                    // 1. Render Trending Grid
+                    const trendingTools = tools.filter(t => trendingIds.includes(t.name));
+                    trendingTools.forEach((tool, index) => {
+                        trendingGrid.appendChild(createCard(tool, index));
+                    });
+
+                    // 2. Render Main Grid (Exclude trending to avoid duplicates)
+                    const mainTools = tools.filter(t => !trendingIds.includes(t.name));
+                    mainTools.forEach((tool, index) => {
+                        toolsGrid.appendChild(createCard(tool, index));
+                    });
+
                 } else {
-                    document.getElementById('noResults').classList.add('hidden');
+                    // Filtered view: Hide distinct trending section, show everything in main grid
+                    if (trendingSection) trendingSection.classList.add('hidden');
+                    const mainTitle = document.getElementById('mainGridTitle');
+                    if (mainTitle) mainTitle.parentElement.style.display = 'none'; // Hide "All Tools" header when searching/filtering
 
                     toolsToRender.forEach((tool, index) => {
-                        const cleanUrl = tool.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
-
-                        const card = document.createElement('div');
-                        card.className = 'glass-card rounded-2xl p-6 hover:bg-slate-800/80 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-500/10 group cursor-pointer border-t border-white/5';
-                        card.onclick = () => window.open(tool.url, '_blank');
-                        card.style.animation = `fadeIn 0.5s ease-out forwards ${index * 0.05}s`;
-                        card.style.opacity = '0'; // Initial state for animation
-
-                        const tagsHtml = tool.tags.map(tag =>
-                            `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-500/10 text-brand-400 border border-brand-500/20">${tag}</span>`
-                        ).join('');
-
-                        card.innerHTML = `
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-center text-2xl ${tool.color} group-hover:scale-110 transition-transform duration-300">
-                                <i class="fa-solid ${tool.icon}"></i>
-                            </div>
-                            <!-- Trending Badge -->
-                            ${['Metricool', 'Hypefury', 'Descript', 'Copy.ai', 'ElevenLabs'].includes(tool.name) ?
-                                `<div class="absolute top-0 right-0 -mt-2 -mr-2 bg-gradient-to-r from-orange-500 to-pink-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-white/10 flex items-center gap-1">
-                                    <i class="fa-solid fa-fire-flame-curved"></i> HOT
-                                 </div>` : ''
-                            }
-                            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-brand-500 transition-colors">
-                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-400 transition-colors">${tool.name}</h3>
-                        <p class="text-slate-400 text-sm mb-4 line-clamp-2 h-10 leading-relaxed">${tool.description}</p>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            ${tagsHtml}
-                        </div>
-                    `;
-                        toolsGrid.appendChild(card);
+                        toolsGrid.appendChild(createCard(tool, index));
                     });
                 }
             }
