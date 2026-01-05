@@ -247,448 +247,476 @@
     <!-- Tools Grid -->
     <div class="relative z-10 pb-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div id="toolsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in"
-                style="animation-delay: 0.4s;">
-                <!-- Tools will be injected here by JS -->
+            <!-- Tools Grid -->
+            <div class="relative z-10 pb-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                    <!-- Trending Section -->
+                    <div id="trendingSection" class="mb-12 hidden animate-fade-in">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="h-8 w-1 bg-gradient-to-b from-orange-500 to-pink-500 rounded-full"></div>
+                            <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                                Trending Now <i class="fa-solid fa-fire text-orange-500 animate-pulse"></i>
+                            </h2>
+                        </div>
+                        <!-- Trending Grid -->
+                        <div id="trendingGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+
+                    <!-- All Tools Header -->
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="h-8 w-1 bg-brand-500 rounded-full"></div>
+                        <h2 class="text-2xl font-bold text-white" id="mainGridTitle">All Tools</h2>
+                    </div>
+
+                    <div id="toolsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in"
+                        style="animation-delay: 0.4s;">
+                        <!-- Tools will be injected here by JS -->
+                    </div>
+
+                    <!-- No Results State -->
+                    <div id="noResults" class="hidden text-center py-20">
+                        <i class="fa-regular fa-face-frown text-6xl text-slate-600 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-slate-300">No tools found</h3>
+                        <p class="text-slate-500 mt-2">Try searching for a different term or category.</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- No Results State -->
-            <div id="noResults" class="hidden text-center py-20">
-                <i class="fa-regular fa-face-frown text-6xl text-slate-600 mb-4"></i>
-                <h3 class="text-2xl font-bold text-slate-300">No tools found</h3>
-                <p class="text-slate-500 mt-2">Try searching for a different term or category.</p>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="relative z-10 py-20 bg-gradient-to-b from-dark-bg to-slate-900/50 border-t border-white/5">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <span
+                    class="inline-block py-1 px-3 rounded-full bg-brand-500/10 text-brand-400 text-xs font-semibold tracking-wide uppercase mb-4 border border-brand-500/20">Don't
+                    get left behind</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Get the top 5 AI tools<br>delivered weekly.
+                </h2>
+                <p class="text-slate-400 text-lg mb-10 max-w-2xl mx-auto">Join 2,000+ founders and creators. We only
+                    send
+                    the useful stuff. No spam, ever.</p>
+
+                <form
+                    action="https://docs.google.com/forms/d/e/1FAIpQLScXXgCkS5coOo2xQwOBanMCim7ulRTEb0wpTHghUZI65TSyGQ/viewform"
+                    target="_blank" class="max-w-md mx-auto relative group">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-brand-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200">
+                    </div>
+                    <div class="relative flex">
+                        <input type="email" placeholder="Enter your email" disabled
+                            class="w-full bg-slate-900 text-white px-6 py-4 rounded-l-lg border border-r-0 border-slate-700 focus:outline-none focus:ring-0 placeholder-slate-600 cursor-not-allowed"
+                            value="Redirecting using button ->">
+                        <button type="submit"
+                            class="bg-brand-600 hover:bg-brand-500 text-white px-8 py-4 rounded-r-lg font-bold transition duration-200 whitespace-nowrap">Join
+                            Free</button>
+                    </div>
+                    <p class="text-slate-600 text-xs mt-3">By clicking above, you'll be taken to our secure sign-up
+                        form.
+                    </p>
+                </form>
             </div>
         </div>
-    </div>
-
-    </div>
-
-    <!-- Newsletter Section -->
-    <div class="relative z-10 py-20 bg-gradient-to-b from-dark-bg to-slate-900/50 border-t border-white/5">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <span
-                class="inline-block py-1 px-3 rounded-full bg-brand-500/10 text-brand-400 text-xs font-semibold tracking-wide uppercase mb-4 border border-brand-500/20">Don't
-                get left behind</span>
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Get the top 5 AI tools<br>delivered weekly.</h2>
-            <p class="text-slate-400 text-lg mb-10 max-w-2xl mx-auto">Join 2,000+ founders and creators. We only send
-                the useful stuff. No spam, ever.</p>
-
-            <form
-                action="https://docs.google.com/forms/d/e/1FAIpQLScXXgCkS5coOo2xQwOBanMCim7ulRTEb0wpTHghUZI65TSyGQ/viewform"
-                target="_blank" class="max-w-md mx-auto relative group">
-                <div
-                    class="absolute -inset-1 bg-gradient-to-r from-brand-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200">
+        <footer class="relative z-10 border-t border-dark-border bg-dark-bg/80 backdrop-blur">
+            <div
+                class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-sm">© 2026 OneAIStop. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScXXgCkS5coOo2xQwOBanMCim7ulRTEb0wpTHghUZI65TSyGQ/viewform"
+                        target="_blank"
+                        class="text-slate-400 hover:text-brand-500 transition-colors text-sm font-medium">
+                        Submit a Tool
+                    </a>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-slate-400 hover:text-brand-500 transition-colors"><i
+                                class="fa-brands fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-brand-500 transition-colors"><i
+                                class="fa-brands fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-brand-500 transition-colors"><i
+                                class="fa-brands fa-github text-xl"></i></a>
+                    </div>
                 </div>
-                <div class="relative flex">
-                    <input type="email" placeholder="Enter your email" disabled
-                        class="w-full bg-slate-900 text-white px-6 py-4 rounded-l-lg border border-r-0 border-slate-700 focus:outline-none focus:ring-0 placeholder-slate-600 cursor-not-allowed"
-                        value="Redirecting using button ->">
-                    <button type="submit"
-                        class="bg-brand-600 hover:bg-brand-500 text-white px-8 py-4 rounded-r-lg font-bold transition duration-200 whitespace-nowrap">Join
-                        Free</button>
-                </div>
-                <p class="text-slate-600 text-xs mt-3">By clicking above, you'll be taken to our secure sign-up form.
-                </p>
-            </form>
-        </div>
-    </div>
-    <footer class="relative z-10 border-t border-dark-border bg-dark-bg/80 backdrop-blur">
-        <div
-            class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-slate-500 text-sm">© 2026 OneAIStop. All rights reserved.</p>
-            <div class="flex items-center gap-4">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScXXgCkS5coOo2xQwOBanMCim7ulRTEb0wpTHghUZI65TSyGQ/viewform"
-                    target="_blank" class="text-slate-400 hover:text-brand-500 transition-colors text-sm font-medium">
-                    Submit a Tool
-                </a>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-slate-400 hover:text-brand-500 transition-colors"><i
-                            class="fa-brands fa-twitter text-xl"></i></a>
-                    <a href="#" class="text-slate-400 hover:text-brand-500 transition-colors"><i
-                            class="fa-brands fa-instagram text-xl"></i></a>
-                    <a href="#" class="text-slate-400 hover:text-brand-500 transition-colors"><i
-                            class="fa-brands fa-github text-xl"></i></a>
-                </div>
-            </div>
-    </footer>
+        </footer>
 
-    <!-- JavaScript Data and Logic -->
-    <script>
-        const tools = [
-            // Image Generators
-            {
-                name: "Midjourney v6",
-                category: "image",
-                description: "The industry leader for artistic, photorealistic images. Unmatched quality and creativity.",
-                url: "https://www.midjourney.com",
-                icon: "fa-palette",
-                color: "text-purple-400",
-                tags: ["Art", "Photorealistic", "Paid"]
-            },
-            {
-                name: "Adobe Firefly",
-                category: "image",
-                description: "Best for clean, commercially safe images. Integrated seamlessly into Photoshop.",
-                url: "https://firefly.adobe.com",
-                icon: "fa-vector-square",
-                color: "text-orange-400",
-                tags: ["Commercial", "Design", "Safe"]
-            },
-            {
-                name: "Ideogram",
-                category: "image",
-                description: "The only AI that handles typography and text inside images perfectly. Ideal for logos.",
-                url: "https://ideogram.ai",
-                icon: "fa-font",
-                color: "text-yellow-400",
-                tags: ["Typography", "Logos", "Freemium"]
-            },
-            {
-                name: "Leonardo.ai",
-                category: "image",
-                description: "High-quality game assets and art with a generous daily free tier for creators.",
-                url: "https://leonardo.ai",
-                icon: "fa-gamepad",
-                color: "text-blue-400",
-                tags: ["Game Assets", "Free Tier", "Art"]
-            },
-            {
-                name: "DALL·E 3",
-                category: "image",
-                description: "Integrated into ChatGPT. Great for following complex instructions and ease of use.",
-                url: "https://openai.com/dall-e-3",
-                icon: "fa-robot",
-                color: "text-green-400",
-                tags: ["Easy", "ChatGPT", "Conversational"]
-            },
+        <!-- JavaScript Data and Logic -->
+        <script>
+            const tools = [
+                // Image Generators
+                {
+                    name: "Midjourney v6",
+                    category: "image",
+                    description: "The industry leader for artistic, photorealistic images. Unmatched quality and creativity.",
+                    url: "https://www.midjourney.com",
+                    icon: "fa-palette",
+                    color: "text-purple-400",
+                    tags: ["Art", "Photorealistic", "Paid"]
+                },
+                {
+                    name: "Adobe Firefly",
+                    category: "image",
+                    description: "Best for clean, commercially safe images. Integrated seamlessly into Photoshop.",
+                    url: "https://firefly.adobe.com",
+                    icon: "fa-vector-square",
+                    color: "text-orange-400",
+                    tags: ["Commercial", "Design", "Safe"]
+                },
+                {
+                    name: "Ideogram",
+                    category: "image",
+                    description: "The only AI that handles typography and text inside images perfectly. Ideal for logos.",
+                    url: "https://ideogram.ai",
+                    icon: "fa-font",
+                    color: "text-yellow-400",
+                    tags: ["Typography", "Logos", "Freemium"]
+                },
+                {
+                    name: "Leonardo.ai",
+                    category: "image",
+                    description: "High-quality game assets and art with a generous daily free tier for creators.",
+                    url: "https://leonardo.ai",
+                    icon: "fa-gamepad",
+                    color: "text-blue-400",
+                    tags: ["Game Assets", "Free Tier", "Art"]
+                },
+                {
+                    name: "DALL·E 3",
+                    category: "image",
+                    description: "Integrated into ChatGPT. Great for following complex instructions and ease of use.",
+                    url: "https://openai.com/dall-e-3",
+                    icon: "fa-robot",
+                    color: "text-green-400",
+                    tags: ["Easy", "ChatGPT", "Conversational"]
+                },
 
-            // Video Generators
-            {
-                name: "Opus Clip",
-                category: "video",
-                description: "Takes a long YouTube video and turns it into 10 viral shorts instantly. A must-have.",
-                url: "https://www.opus.pro",
-                icon: "fa-scissors",
-                color: "text-pink-400",
-                tags: ["Repurposing", "Shorts", "Viral"]
-            },
-            {
-                name: "Descript",
-                category: "video",
-                description: "Edit video by editing text. The fastest way to edit podcasts and clips.",
-                url: "https://www.descript.com",
-                icon: "fa-headphones",
-                color: "text-blue-400",
-                tags: ["Editing", "Podcast", "Transcription"]
-            },
-            {
-                name: "Synthesia",
-                category: "video",
-                description: "Create professional AI videos from text in 120+ languages. No cameras needed.",
-                url: "https://www.synthesia.io",
-                icon: "fa-user-tie",
-                color: "text-indigo-400",
-                tags: ["Avatars", "Training", "Corporate"]
-            },
-            {
-                name: "InVideo AI",
-                category: "video",
-                description: "Type a prompt like 'Documentary about Mars', and it creates the full video with stock footage.",
-                url: "https://invideo.io",
-                icon: "fa-clapperboard",
-                color: "text-cyan-400",
-                tags: ["Text-to-Video", "Faceless", "YouTube"]
-            },
-            {
-                name: "Sora / Kling AI",
-                category: "video",
-                description: "The absolute cutting edge for cinematic, realistic video generation from text prompts.",
-                url: "https://openai.com/sora",
-                icon: "fa-film",
-                color: "text-indigo-400",
-                tags: ["Cinematic", "Realistic", "High-End"]
-            },
-            {
-                name: "Runway Gen-3",
-                category: "video",
-                description: "Professional tools for editors needing specific visual effects and video inpainting.",
-                url: "https://runwayml.com",
-                icon: "fa-wand-magic-sparkles",
-                color: "text-teal-400",
-                tags: ["Pro", "VFX", "Editing"]
-            },
-            {
-                name: "Pika Art",
-                category: "video",
-                description: "Great for animating static images or creating cute 3D animations and fun clips.",
-                url: "https://pika.art",
-                icon: "fa-ghost",
-                color: "text-purple-400",
-                tags: ["Animation", "Fun", "Image-to-Video"]
-            },
+                // Video Generators
+                {
+                    name: "Opus Clip",
+                    category: "video",
+                    description: "Takes a long YouTube video and turns it into 10 viral shorts instantly. A must-have.",
+                    url: "https://www.opus.pro",
+                    icon: "fa-scissors",
+                    color: "text-pink-400",
+                    tags: ["Repurposing", "Shorts", "Viral"]
+                },
+                {
+                    name: "Descript",
+                    category: "video",
+                    description: "Edit video by editing text. The fastest way to edit podcasts and clips.",
+                    url: "https://www.descript.com",
+                    icon: "fa-headphones",
+                    color: "text-blue-400",
+                    tags: ["Editing", "Podcast", "Transcription"]
+                },
+                {
+                    name: "Synthesia",
+                    category: "video",
+                    description: "Create professional AI videos from text in 120+ languages. No cameras needed.",
+                    url: "https://www.synthesia.io",
+                    icon: "fa-user-tie",
+                    color: "text-indigo-400",
+                    tags: ["Avatars", "Training", "Corporate"]
+                },
+                {
+                    name: "InVideo AI",
+                    category: "video",
+                    description: "Type a prompt like 'Documentary about Mars', and it creates the full video with stock footage.",
+                    url: "https://invideo.io",
+                    icon: "fa-clapperboard",
+                    color: "text-cyan-400",
+                    tags: ["Text-to-Video", "Faceless", "YouTube"]
+                },
+                {
+                    name: "Sora / Kling AI",
+                    category: "video",
+                    description: "The absolute cutting edge for cinematic, realistic video generation from text prompts.",
+                    url: "https://openai.com/sora",
+                    icon: "fa-film",
+                    color: "text-indigo-400",
+                    tags: ["Cinematic", "Realistic", "High-End"]
+                },
+                {
+                    name: "Runway Gen-3",
+                    category: "video",
+                    description: "Professional tools for editors needing specific visual effects and video inpainting.",
+                    url: "https://runwayml.com",
+                    icon: "fa-wand-magic-sparkles",
+                    color: "text-teal-400",
+                    tags: ["Pro", "VFX", "Editing"]
+                },
+                {
+                    name: "Pika Art",
+                    category: "video",
+                    description: "Great for animating static images or creating cute 3D animations and fun clips.",
+                    url: "https://pika.art",
+                    icon: "fa-ghost",
+                    color: "text-purple-400",
+                    tags: ["Animation", "Fun", "Image-to-Video"]
+                },
 
-            // Thumbnail Generators
-            {
-                name: "Canva Magic Studio",
-                category: "thumbnail",
-                description: "The gold standard. Use 'Magic Media' to generate assets and templates for high CTR.",
-                url: "https://www.canva.com",
-                icon: "fa-pen-nib",
-                color: "text-blue-500",
-                tags: ["Design", "Templates", "Easy"]
-            },
-            {
-                name: "Thumbnail.ai",
-                category: "thumbnail",
-                description: "A specialized tool that helps design and rates your thumbnail's potential CTR.",
-                url: "https://thumbnail.ai",
-                icon: "fa-image",
-                color: "text-red-400",
-                tags: ["CTR", "Analytics", "Optimization"]
-            },
-            {
-                name: "Adobe Express",
-                category: "thumbnail",
-                description: "Very fast, template-based generation using the powerful Firefly engine.",
-                url: "https://www.adobe.com/express/",
-                icon: "fa-bolt",
-                color: "text-indigo-500",
-                tags: ["Fast", "Professional", "Templates"]
-            },
+                // Thumbnail Generators
+                {
+                    name: "Canva Magic Studio",
+                    category: "thumbnail",
+                    description: "The gold standard. Use 'Magic Media' to generate assets and templates for high CTR.",
+                    url: "https://www.canva.com",
+                    icon: "fa-pen-nib",
+                    color: "text-blue-500",
+                    tags: ["Design", "Templates", "Easy"]
+                },
+                {
+                    name: "Thumbnail.ai",
+                    category: "thumbnail",
+                    description: "A specialized tool that helps design and rates your thumbnail's potential CTR.",
+                    url: "https://thumbnail.ai",
+                    icon: "fa-image",
+                    color: "text-red-400",
+                    tags: ["CTR", "Analytics", "Optimization"]
+                },
+                {
+                    name: "Adobe Express",
+                    category: "thumbnail",
+                    description: "Very fast, template-based generation using the powerful Firefly engine.",
+                    url: "https://www.adobe.com/express/",
+                    icon: "fa-bolt",
+                    color: "text-indigo-500",
+                    tags: ["Fast", "Professional", "Templates"]
+                },
 
-            // Audio/Voice
-            {
-                name: "ElevenLabs",
-                category: "voice",
-                description: "The most realistic AI voices in the world. Indistinguishable from humans. The G.O.A.T.",
-                url: "https://try.elevenlabs.io/ups1cihdwb54",
-                icon: "fa-microphone-lines",
-                color: "text-gray-200",
-                tags: ["Realistic", "Cloning", "Dubbing"]
-            },
-            {
-                name: "Murf.ai",
-                category: "voice",
-                description: "Great control over pitch and speed, perfect for professional corporate videos.",
-                url: "https://murf.ai",
-                icon: "fa-sliders",
-                color: "text-emerald-400",
-                tags: ["Corporate", "Control", "Voiceover"]
-            },
-            {
-                name: "Suno AI",
-                category: "voice",
-                description: "Generates full radio-quality songs (lyrics + vocals) from a simple text prompt.",
-                url: "https://suno.com",
-                icon: "fa-music",
-                color: "text-pink-500",
-                tags: ["Music", "Songs", "Audio"]
-            },
-            {
-                name: "AudioCraft",
-                category: "voice",
-                description: "Meta's tool for generating realistic sound effects (e.g., 'footsteps on snow').",
-                url: "https://audiocraft.metademolab.com",
-                icon: "fa-wave-square",
-                color: "text-yellow-200",
-                tags: ["SFX", "Sound Design", "Meta"]
-            },
+                // Audio/Voice
+                {
+                    name: "ElevenLabs",
+                    category: "voice",
+                    description: "The most realistic AI voices in the world. Indistinguishable from humans. The G.O.A.T.",
+                    url: "https://try.elevenlabs.io/ups1cihdwb54",
+                    icon: "fa-microphone-lines",
+                    color: "text-gray-200",
+                    tags: ["Realistic", "Cloning", "Dubbing"]
+                },
+                {
+                    name: "Murf.ai",
+                    category: "voice",
+                    description: "Great control over pitch and speed, perfect for professional corporate videos.",
+                    url: "https://murf.ai",
+                    icon: "fa-sliders",
+                    color: "text-emerald-400",
+                    tags: ["Corporate", "Control", "Voiceover"]
+                },
+                {
+                    name: "Suno AI",
+                    category: "voice",
+                    description: "Generates full radio-quality songs (lyrics + vocals) from a simple text prompt.",
+                    url: "https://suno.com",
+                    icon: "fa-music",
+                    color: "text-pink-500",
+                    tags: ["Music", "Songs", "Audio"]
+                },
+                {
+                    name: "AudioCraft",
+                    category: "voice",
+                    description: "Meta's tool for generating realistic sound effects (e.g., 'footsteps on snow').",
+                    url: "https://audiocraft.metademolab.com",
+                    icon: "fa-wave-square",
+                    color: "text-yellow-200",
+                    tags: ["SFX", "Sound Design", "Meta"]
+                },
 
-            // Script/Text
-            {
-                name: "Claude 3.5 Sonnet",
-                category: "script",
-                description: "Writes much more human-like, nuanced, and less 'robotic' scripts than competitors.",
-                url: "https://claude.ai",
-                icon: "fa-feather-pointed",
-                color: "text-orange-200",
-                tags: ["Writing", "Human-like", "Long-form"]
-            },
-            {
-                name: "ChatGPT-4o",
-                category: "script",
-                description: "Extremely versatile. Great for brainstorming ideas, formatting tables, and coding.",
-                url: "https://chat.openai.com",
-                icon: "fa-message",
-                color: "text-green-500",
-                tags: ["Versatile", "Brainstorming", "Coding"]
-            },
-            {
-                name: "Jasper",
-                category: "script",
-                description: "Built specifically for writing sales copy, ads, and video descriptions that actually sell.",
-                url: "https://www.jasper.ai",
-                icon: "fa-bullhorn",
-                color: "text-purple-500",
-                tags: ["Marketing", "Sales", "Copywriting"]
-            },
-            {
-                name: "Copy.ai",
-                category: "script",
-                description: "Generate high-quality copy for blog posts, social media, and emails in seconds.",
-                url: "https://www.copy.ai",
-                icon: "fa-pen-fancy",
-                color: "text-emerald-400",
-                tags: ["Copywriting", "Marketing", "Blog"]
-            },
-            {
-                name: "Writesonic",
-                category: "script",
-                description: "Best for writing SEO-optimized articles and landing pages that rank on Google.",
-                url: "https://writesonic.com",
-                icon: "fa-pencil",
-                color: "text-orange-400",
-                tags: ["SEO", "Articles", "Content"]
-            },
-            {
-                name: "Grammarly",
-                category: "script",
-                description: "AI writing assistant that ensures your content is mistake-free and polished.",
-                url: "https://www.grammarly.com",
-                icon: "fa-spell-check",
-                color: "text-green-500",
-                tags: ["Editing", "Grammar", "Pro"]
-            },
-            {
-                name: "HeyGen",
-                category: "video",
-                description: "Create professional AI avatar videos for marketing and sales. No camera needed.",
-                url: "https://www.heygen.com",
-                icon: "fa-user-tie",
-                color: "text-indigo-400",
-                tags: ["Avatar", "Marketing", "Video"]
-            },
+                // Script/Text
+                {
+                    name: "Claude 3.5 Sonnet",
+                    category: "script",
+                    description: "Writes much more human-like, nuanced, and less 'robotic' scripts than competitors.",
+                    url: "https://claude.ai",
+                    icon: "fa-feather-pointed",
+                    color: "text-orange-200",
+                    tags: ["Writing", "Human-like", "Long-form"]
+                },
+                {
+                    name: "ChatGPT-4o",
+                    category: "script",
+                    description: "Extremely versatile. Great for brainstorming ideas, formatting tables, and coding.",
+                    url: "https://chat.openai.com",
+                    icon: "fa-message",
+                    color: "text-green-500",
+                    tags: ["Versatile", "Brainstorming", "Coding"]
+                },
+                {
+                    name: "Jasper",
+                    category: "script",
+                    description: "Built specifically for writing sales copy, ads, and video descriptions that actually sell.",
+                    url: "https://www.jasper.ai",
+                    icon: "fa-bullhorn",
+                    color: "text-purple-500",
+                    tags: ["Marketing", "Sales", "Copywriting"]
+                },
+                {
+                    name: "Copy.ai",
+                    category: "script",
+                    description: "Generate high-quality copy for blog posts, social media, and emails in seconds.",
+                    url: "https://www.copy.ai",
+                    icon: "fa-pen-fancy",
+                    color: "text-emerald-400",
+                    tags: ["Copywriting", "Marketing", "Blog"]
+                },
+                {
+                    name: "Writesonic",
+                    category: "script",
+                    description: "Best for writing SEO-optimized articles and landing pages that rank on Google.",
+                    url: "https://writesonic.com",
+                    icon: "fa-pencil",
+                    color: "text-orange-400",
+                    tags: ["SEO", "Articles", "Content"]
+                },
+                {
+                    name: "Grammarly",
+                    category: "script",
+                    description: "AI writing assistant that ensures your content is mistake-free and polished.",
+                    url: "https://www.grammarly.com",
+                    icon: "fa-spell-check",
+                    color: "text-green-500",
+                    tags: ["Editing", "Grammar", "Pro"]
+                },
+                {
+                    name: "HeyGen",
+                    category: "video",
+                    description: "Create professional AI avatar videos for marketing and sales. No camera needed.",
+                    url: "https://www.heygen.com",
+                    icon: "fa-user-tie",
+                    color: "text-indigo-400",
+                    tags: ["Avatar", "Marketing", "Video"]
+                },
 
-            // Social Media Tools
-            {
-                name: "Predis.ai",
-                category: "social",
-                description: "Generates Instagram Reels, posts, and carousels from simple text inputs instantly.",
-                url: "https://predis.ai",
-                icon: "fa-instagram",
-                color: "text-pink-500",
-                tags: ["Instagram", "Reels", "Generation"]
-            },
-            {
-                name: "Flick",
-                category: "social",
-                description: "The #1 AI hashtag tool. Finds viral hashtags and schedules your posts strategically.",
-                url: "https://www.flick.social",
-                icon: "fa-hashtag",
-                color: "text-blue-400",
-                tags: ["Hashtags", "Growth", "Analytics"]
-            },
-            {
-                name: "Metricool",
-                category: "social",
-                description: "The ultimate all-in-one tool for scheduling and analytics across all social platforms.",
-                url: "https://f.mtr.cool/HMMMJL",
-                icon: "fa-chart-pie",
-                color: "text-teal-400",
-                tags: ["Analytics", "Scheduling", "Management"]
-            },
-            {
-                name: "Taplio",
-                category: "social",
-                description: "Grow on LinkedIn using AI. Generates posts, carousels, and finds viral content.",
-                url: "https://taplio.com",
-                icon: "fa-linkedin",
-                color: "text-blue-600",
-                tags: ["LinkedIn", "Growth", "Personal Brand"]
-            },
-            {
-                name: "Hypefury",
-                category: "social",
-                description: "The best tool for growing on X (Twitter). Auto-plugs and thread scheduling.",
-                url: "https://hypefury.com/?via=net13",
-                icon: "fa-twitter",
-                color: "text-sky-500",
-                tags: ["Twitter", "X", "Threads"]
-            },
+                // Social Media Tools
+                {
+                    name: "Predis.ai",
+                    category: "social",
+                    description: "Generates Instagram Reels, posts, and carousels from simple text inputs instantly.",
+                    url: "https://predis.ai",
+                    icon: "fa-instagram",
+                    color: "text-pink-500",
+                    tags: ["Instagram", "Reels", "Generation"]
+                },
+                {
+                    name: "Flick",
+                    category: "social",
+                    description: "The #1 AI hashtag tool. Finds viral hashtags and schedules your posts strategically.",
+                    url: "https://www.flick.social",
+                    icon: "fa-hashtag",
+                    color: "text-blue-400",
+                    tags: ["Hashtags", "Growth", "Analytics"]
+                },
+                {
+                    name: "Metricool",
+                    category: "social",
+                    description: "The ultimate all-in-one tool for scheduling and analytics across all social platforms.",
+                    url: "https://f.mtr.cool/HMMMJL",
+                    icon: "fa-chart-pie",
+                    color: "text-teal-400",
+                    tags: ["Analytics", "Scheduling", "Management"]
+                },
+                {
+                    name: "Taplio",
+                    category: "social",
+                    description: "Grow on LinkedIn using AI. Generates posts, carousels, and finds viral content.",
+                    url: "https://taplio.com",
+                    icon: "fa-linkedin",
+                    color: "text-blue-600",
+                    tags: ["LinkedIn", "Growth", "Personal Brand"]
+                },
+                {
+                    name: "Hypefury",
+                    category: "social",
+                    description: "The best tool for growing on X (Twitter). Auto-plugs and thread scheduling.",
+                    url: "https://hypefury.com/?via=net13",
+                    icon: "fa-twitter",
+                    color: "text-sky-500",
+                    tags: ["Twitter", "X", "Threads"]
+                },
 
-            {
-                name: "Luma Dream Machine",
-                category: "video",
-                description: "Next-gen video generation model. fast, realistic, and cinematic AI video creation.",
-                url: "https://lumalabs.ai/dream-machine",
-                icon: "fa-video",
-                color: "text-green-300",
-                tags: ["Cinematic", "New", "Free"]
-            },
-            {
-                name: "Gamma App",
-                category: "productivity",
-                description: "Generate beautiful presentations, documents, and websites in seconds with AI.",
-                url: "https://gamma.app",
-                icon: "fa-layer-group",
-                color: "text-yellow-400",
-                tags: ["Presentations", "Slides", "Design"]
-            },
-            {
-                name: "Perplexity",
-                category: "script",
-                description: "The AI search engine. Get instant, up-to-date answers with cited sources.",
-                url: "https://www.perplexity.ai",
-                icon: "fa-magnifying-glass",
-                color: "text-teal-300",
-                tags: ["Search", "Research", "Free"]
-            },
-            {
-                name: "Speechify",
-                category: "voice",
-                description: "The #1 text-to-speech reader. Listen to documents, articles, and PDFs like an audiobook.",
-                url: "https://speechify.com",
-                icon: "fa-headphones-simple",
-                color: "text-blue-400",
-                tags: ["Reading", "Accessibility", "Voice"]
-            },
-            {
-                name: "Quillbot",
-                category: "script",
-                description: "The best paraphrasing tool. Rewrite text to sound more professional or avoid detection.",
-                url: "https://quillbot.com",
-                icon: "fa-rotate",
-                color: "text-green-500",
-                tags: ["Paraphrasing", "School", "Writing"]
-            }
-        ];
+                {
+                    name: "Luma Dream Machine",
+                    category: "video",
+                    description: "Next-gen video generation model. fast, realistic, and cinematic AI video creation.",
+                    url: "https://lumalabs.ai/dream-machine",
+                    icon: "fa-video",
+                    color: "text-green-300",
+                    tags: ["Cinematic", "New", "Free"]
+                },
+                {
+                    name: "Gamma App",
+                    category: "productivity",
+                    description: "Generate beautiful presentations, documents, and websites in seconds with AI.",
+                    url: "https://gamma.app",
+                    icon: "fa-layer-group",
+                    color: "text-yellow-400",
+                    tags: ["Presentations", "Slides", "Design"]
+                },
+                {
+                    name: "Perplexity",
+                    category: "script",
+                    description: "The AI search engine. Get instant, up-to-date answers with cited sources.",
+                    url: "https://www.perplexity.ai",
+                    icon: "fa-magnifying-glass",
+                    color: "text-teal-300",
+                    tags: ["Search", "Research", "Free"]
+                },
+                {
+                    name: "Speechify",
+                    category: "voice",
+                    description: "The #1 text-to-speech reader. Listen to documents, articles, and PDFs like an audiobook.",
+                    url: "https://speechify.com",
+                    icon: "fa-headphones-simple",
+                    color: "text-blue-400",
+                    tags: ["Reading", "Accessibility", "Voice"]
+                },
+                {
+                    name: "Quillbot",
+                    category: "script",
+                    description: "The best paraphrasing tool. Rewrite text to sound more professional or avoid detection.",
+                    url: "https://quillbot.com",
+                    icon: "fa-rotate",
+                    color: "text-green-500",
+                    tags: ["Paraphrasing", "School", "Writing"]
+                }
+            ];
 
-        const toolsGrid = document.getElementById('toolsGrid');
-        const searchInput = document.getElementById('searchInput');
-        let currentFilter = 'all';
+            const toolsGrid = document.getElementById('toolsGrid');
+            const searchInput = document.getElementById('searchInput');
+            let currentFilter = 'all';
 
-        function renderTools(toolsToRender) {
-            toolsGrid.innerHTML = '';
+            function renderTools(toolsToRender) {
+                toolsGrid.innerHTML = '';
 
-            if (toolsToRender.length === 0) {
-                document.getElementById('noResults').classList.remove('hidden');
-            } else {
-                document.getElementById('noResults').classList.add('hidden');
+                if (toolsToRender.length === 0) {
+                    document.getElementById('noResults').classList.remove('hidden');
+                } else {
+                    document.getElementById('noResults').classList.add('hidden');
 
-                toolsToRender.forEach((tool, index) => {
-                    const cleanUrl = tool.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+                    toolsToRender.forEach((tool, index) => {
+                        const cleanUrl = tool.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
-                    const card = document.createElement('div');
-                    card.className = 'glass-card rounded-2xl p-6 hover:bg-slate-800/80 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-500/10 group cursor-pointer border-t border-white/5';
-                    card.onclick = () => window.open(tool.url, '_blank');
-                    card.style.animation = `fadeIn 0.5s ease-out forwards ${index * 0.05}s`;
-                    card.style.opacity = '0'; // Initial state for animation
+                        const card = document.createElement('div');
+                        card.className = 'glass-card rounded-2xl p-6 hover:bg-slate-800/80 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-500/10 group cursor-pointer border-t border-white/5';
+                        card.onclick = () => window.open(tool.url, '_blank');
+                        card.style.animation = `fadeIn 0.5s ease-out forwards ${index * 0.05}s`;
+                        card.style.opacity = '0'; // Initial state for animation
 
-                    const tagsHtml = tool.tags.map(tag =>
-                        `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-500/10 text-brand-400 border border-brand-500/20">${tag}</span>`
-                    ).join('');
+                        const tagsHtml = tool.tags.map(tag =>
+                            `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-500/10 text-brand-400 border border-brand-500/20">${tag}</span>`
+                        ).join('');
 
-                    card.innerHTML = `
+                        card.innerHTML = `
                         <div class="flex items-start justify-between mb-4">
                             <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-center text-2xl ${tool.color} group-hover:scale-110 transition-transform duration-300">
                                 <i class="fa-solid ${tool.icon}"></i>
                             </div>
                             <!-- Trending Badge -->
                             ${['Metricool', 'Hypefury', 'Descript', 'Copy.ai', 'ElevenLabs'].includes(tool.name) ?
-                            `<div class="absolute top-0 right-0 -mt-2 -mr-2 bg-gradient-to-r from-orange-500 to-pink-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-white/10 flex items-center gap-1">
+                                `<div class="absolute top-0 right-0 -mt-2 -mr-2 bg-gradient-to-r from-orange-500 to-pink-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-white/10 flex items-center gap-1">
                                     <i class="fa-solid fa-fire-flame-curved"></i> HOT
                                  </div>` : ''
-                        }
+                            }
                             <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-brand-500 transition-colors">
                                 <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                             </div>
@@ -699,67 +727,67 @@
                             ${tagsHtml}
                         </div>
                     `;
-                    toolsGrid.appendChild(card);
-                });
+                        toolsGrid.appendChild(card);
+                    });
+                }
             }
-        }
 
-        function filterTools(category) {
-            currentFilter = category;
+            function filterTools(category) {
+                currentFilter = category;
 
-            // Update buttons
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                // Remove active classes
-                btn.classList.remove('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/20');
-                // Add inactive classes
-                btn.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-white/5');
+                // Update buttons
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    // Remove active classes
+                    btn.classList.remove('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/20');
+                    // Add inactive classes
+                    btn.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-white/5');
 
-                // Special handling for 'Free' button reset
-                if (btn.innerText.includes('Free')) {
-                    btn.classList.add('text-green-400/90', 'hover:bg-green-500/10');
-                    btn.classList.remove('text-slate-400');
-                }
-            });
+                    // Special handling for 'Free' button reset
+                    if (btn.innerText.includes('Free')) {
+                        btn.classList.add('text-green-400/90', 'hover:bg-green-500/10');
+                        btn.classList.remove('text-slate-400');
+                    }
+                });
 
-            // Style active button
-            const activeBtn = event.currentTarget; // Safer than event.target for button with icon
-            activeBtn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-white/5', 'text-green-400/90', 'hover:bg-green-500/10');
-            activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/20');
+                // Style active button
+                const activeBtn = event.currentTarget; // Safer than event.target for button with icon
+                activeBtn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-white/5', 'text-green-400/90', 'hover:bg-green-500/10');
+                activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/20');
 
-            filterAndRender();
-        }
+                filterAndRender();
+            }
 
-        function filterAndRender() {
-            const searchTerm = searchInput.value.toLowerCase();
+            function filterAndRender() {
+                const searchTerm = searchInput.value.toLowerCase();
 
-            const filtered = tools.filter(tool => {
-                let matchesCategory = false;
+                const filtered = tools.filter(tool => {
+                    let matchesCategory = false;
 
-                if (currentFilter === 'all') {
-                    matchesCategory = true;
-                } else if (currentFilter === 'free') {
-                    matchesCategory = tool.tags.some(tag => tag.toLowerCase() === 'free');
-                } else {
-                    matchesCategory = tool.category === currentFilter;
-                }
+                    if (currentFilter === 'all') {
+                        matchesCategory = true;
+                    } else if (currentFilter === 'free') {
+                        matchesCategory = tool.tags.some(tag => tag.toLowerCase() === 'free');
+                    } else {
+                        matchesCategory = tool.category === currentFilter;
+                    }
 
-                const matchesSearch = tool.name.toLowerCase().includes(searchTerm) ||
-                    tool.description.toLowerCase().includes(searchTerm) ||
-                    tool.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                    const matchesSearch = tool.name.toLowerCase().includes(searchTerm) ||
+                        tool.description.toLowerCase().includes(searchTerm) ||
+                        tool.tags.some(tag => tag.toLowerCase().includes(searchTerm));
 
-                return matchesCategory && matchesSearch;
-            });
+                    return matchesCategory && matchesSearch;
+                });
 
-            renderTools(filtered);
-        }
+                renderTools(filtered);
+            }
 
-        // Initialize
-        renderTools(tools);
+            // Initialize
+            renderTools(tools);
 
-        // Event Listeners
-        searchInput.addEventListener('input', filterAndRender);
+            // Event Listeners
+            searchInput.addEventListener('input', filterAndRender);
 
-    </script>
+        </script>
 </body>
 
 </html>
