@@ -780,28 +780,83 @@
                 }
             }
 
+            const subFilterContainer = document.getElementById('subFilterContainer');
+            const subFilterDock = document.getElementById('subFilterDock');
+            let currentSubFilter = null;
+
+            // Sub-category definitions
+            const subCategories = {
+                'image': ['Logos', 'Art', 'Realistic', 'Editing'],
+                'video': ['Avatars', 'Shorts', 'Editing', 'Cinematic'],
+                'voice': ['Cloning', 'TTS', 'Music', 'Dubbing'],
+                'script': ['Copywriting', 'SEO', 'Coding', 'Research'],
+                'social': ['Instagram', 'Twitter', 'LinkedIn', 'Analytics'],
+                'productivity': ['Slides', 'Notetaking', 'Automation']
+            };
+
             function filterTools(category) {
                 currentFilter = category;
+                currentSubFilter = null; // Reset sub-filter
 
-                // Update buttons
+                // Update Category Buttons
                 document.querySelectorAll('.category-btn').forEach(btn => {
-                    // Remove active classes
                     btn.classList.remove('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/20');
-                    // Add inactive classes
                     btn.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-white/5');
-
-                    // Special handling for 'Free' button reset
                     if (btn.innerText.includes('Free')) {
                         btn.classList.add('text-green-400/90', 'hover:bg-green-500/10');
                         btn.classList.remove('text-slate-400');
                     }
                 });
 
-                // Style active button
-                const activeBtn = event.currentTarget; // Safer than event.target for button with icon
+                const activeBtn = event.currentTarget;
                 activeBtn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-white/5', 'text-green-400/90', 'hover:bg-green-500/10');
                 activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/20');
 
+                // Update Sub-filters
+                updateSubFilters(category);
+
+                filterAndRender();
+            }
+
+            function updateSubFilters(category) {
+                const subs = subCategories[category];
+
+                if (subs && subs.length > 0) {
+                    subFilterDock.innerHTML = '';
+                    subs.forEach(sub => {
+                        const btn = document.createElement('button');
+                        btn.className = 'sub-filter-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-white/10 transition-colors whitespace-nowrap';
+                        btn.innerText = sub;
+                        btn.onclick = (e) => toggleSubFilter(sub, e.target);
+                        subFilterDock.appendChild(btn);
+                    });
+
+                    subFilterContainer.classList.remove('hidden');
+                    // Small timeout to allow transition
+                    setTimeout(() => subFilterContainer.classList.remove('opacity-0'), 10);
+                } else {
+                    subFilterContainer.classList.add('opacity-0');
+                    setTimeout(() => subFilterContainer.classList.add('hidden'), 300);
+                }
+            }
+
+            function toggleSubFilter(sub, btnElement) {
+                // Toggle logic
+                if (currentSubFilter === sub) {
+                    currentSubFilter = null; // De-select
+                    btnElement.classList.remove('bg-white/10', 'text-white');
+                    btnElement.classList.add('text-slate-400');
+                } else {
+                    currentSubFilter = sub;
+                    // Reset all others
+                    document.querySelectorAll('.sub-filter-btn').forEach(b => {
+                        b.classList.remove('bg-white/20', 'text-white', 'shadow-sm');
+                        b.classList.add('text-slate-400');
+                    });
+                    // Highlight current
+                    btnElement.classList.remove('text-slate-400', 'hover:bg-white/10');
+                    btnElement.classList.add('bg-white/20', 'text-white', 'shadow-sm');
+                }
                 filterAndRender();
             }
 
@@ -819,11 +874,17 @@
                         matchesCategory = tool.category === currentFilter;
                     }
 
+                    // Strict Sub-filter matching (must match one of the tags)
+                    let matchesSub = true;
+                    if (currentSubFilter) {
+                        matchesSub = tool.tags.some(t => t.toLowerCase() === currentSubFilter.toLowerCase());
+                    }
+
                     const matchesSearch = tool.name.toLowerCase().includes(searchTerm) ||
                         tool.description.toLowerCase().includes(searchTerm) ||
                         tool.tags.some(tag => tag.toLowerCase().includes(searchTerm));
 
-                    return matchesCategory && matchesSearch;
+                    return matchesCategory && matchesSearch && matchesSub;
                 });
 
                 renderTools(filtered);
