@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Nexus | The Ultimate AI Tools Directory</title>
+    <meta name="description"
+        content="A curated list of the best AI tools for 2026. Generate images, videos, thumbnails, and more.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#0f172a', /* Slate 900 */
+                            card: '#1e293b', /* Slate 800 */
+                            border: '#334155', /* Slate 700 */
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen relative overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+    <!-- Background Effects -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div
+            class="absolute top-0 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob">
+        </div>
+        <div
+            class="absolute top-0 right-1/4 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-32 left-1/3 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/20">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <span class="font-bold text-2xl tracking-tight text-white">AI<span
+                            class="text-brand-500">Nexus</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#"
+                            class="bg-brand-500/10 text-brand-500 px-4 py-2 rounded-full text-sm font-medium border border-brand-500/20 hover:bg-brand-500 hover:text-white transition-all duration-300">Submit
+                            Tool</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative z-10 pt-32 pb-12 sm:pt-40 sm:pb-16 lg:pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1
+                class="text-4xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-gray-400 tracking-tight mb-6 animate-fade-in">
+                Unlock Your <span class="text-brand-500">Creative Potential</span><br>With AI
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-400 mb-10 animate-fade-in"
+                style="animation-delay: 0.1s;">
+                The ultimate curated directory of the best AI tools for 2026. Generate images, videos, thumbnails, and
+                more in seconds.
+            </p>
+
+            <!-- Search Bar -->
+            <div class="max-w-xl mx-auto relative group animate-fade-in" style="animation-delay: 0.2s;">
+                <div
+                    class="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-brand-600 rounded-full blur opacity-50 group-hover:opacity-100 transition duration-300">
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-search text-slate-400"></i>
+                    </div>
+                    <input type="text" id="searchInput"
+                        class="block w-full pl-14 pr-6 py-4 rounded-full bg-dark-card border border-dark-border text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent shadow-2xl transition-all"
+                        placeholder="Search for tools (e.g., 'video', 'voice', 'midjourney')...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="relative z-10 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-3 animate-fade-in" style="animation-delay: 0.3s;"
+                id="categoryContainer">
+                <button onclick="filterTools('all')"
+                    class="category-btn active px-6 py-2.5 rounded-full text-sm font-medium bg-brand-600 text-white shadow-lg shadow-brand-500/25 transition-all hover:transform hover:-translate-y-1 hover:shadow-xl ring-2 ring-brand-500 ring-offset-2 ring-offset-[#0f172a]">All
+                    Tools</button>
+                <button onclick="filterTools('image')"
+                    class="category-btn px-6 py-2.5 rounded-full text-sm font-medium bg-dark-card border border-dark-border text-slate-300 hover:bg-brand-500/10 hover:text-brand-500 hover:border-brand-500/50 transition-all hover:transform hover:-translate-y-1">Image</button>
+                <button onclick="filterTools('video')"
+                    class="category-btn px-6 py-2.5 rounded-full text-sm font-medium bg-dark-card border border-dark-border text-slate-300 hover:bg-brand-500/10 hover:text-brand-500 hover:border-brand-500/50 transition-all hover:transform hover:-translate-y-1">Video</button>
+                <button onclick="filterTools('thumbnail')"
+                    class="category-btn px-6 py-2.5 rounded-full text-sm font-medium bg-dark-card border border-dark-border text-slate-300 hover:bg-brand-500/10 hover:text-brand-500 hover:border-brand-500/50 transition-all hover:transform hover:-translate-y-1">Thumbnail</button>
+                <button onclick="filterTools('voice')"
+                    class="category-btn px-6 py-2.5 rounded-full text-sm font-medium bg-dark-card border border-dark-border text-slate-300 hover:bg-brand-500/10 hover:text-brand-500 hover:border-brand-500/50 transition-all hover:transform hover:-translate-y-1">Voice
+                    & Audio</button>
+                <button onclick="filterTools('script')"
+                    class="category-btn px-6 py-2.5 rounded-full text-sm font-medium bg-dark-card border border-dark-border text-slate-300 hover:bg-brand-500/10 hover:text-brand-500 hover:border-brand-500/50 transition-all hover:transform hover:-translate-y-1">Script
+                    & Text</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tools Grid -->
+    <div class="relative z-10 pb-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="toolsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in"
+                style="animation-delay: 0.4s;">
+                <!-- Tools will be injected here by JS -->
+            </div>
+
+            <!-- No Results State -->
+            <div id="noResults" class="hidden text-center py-20">
+                <i class="fa-regular fa-face-frown text-6xl text-slate-600 mb-4"></i>
+                <h3 class="text-2xl font-bold text-slate-300">No tools found</h3>
+                <p class="text-slate-500 mt-2">Try searching for a different term or category.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-dark-border bg-dark-bg/80 backdrop-blur">
+        <div
+            class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-slate-500 text-sm">© 2026 AI Nexus. All rights reserved.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="text-slate-400 hover:text-brand-500 transition-colors"><i
+                        class="fa-brands fa-twitter text-xl"></i></a>
+                <a href="#" class="text-slate-400 hover:text-brand-500 transition-colors"><i
+                        class="fa-brands fa-instagram text-xl"></i></a>
+                <a href="#" class="text-slate-400 hover:text-brand-500 transition-colors"><i
+                        class="fa-brands fa-github text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Data and Logic -->
+    <script>
+        const tools = [
+            // Image Generators
+            {
+                name: "Midjourney v6",
+                category: "image",
+                description: "The industry leader for artistic, photorealistic images. Unmatched quality and creativity.",
+                url: "https://www.midjourney.com",
+                icon: "fa-palette",
+                color: "text-purple-400",
+                tags: ["Art", "Photorealistic", "Paid"]
+            },
+            {
+                name: "Adobe Firefly",
+                category: "image",
+                description: "Best for clean, commercially safe images. Integrated seamlessly into Photoshop.",
+                url: "https://firefly.adobe.com",
+                icon: "fa-vector-square",
+                color: "text-orange-400",
+                tags: ["Commercial", "Design", "Safe"]
+            },
+            {
+                name: "Ideogram",
+                category: "image",
+                description: "The only AI that handles typography and text inside images perfectly. Ideal for logos.",
+                url: "https://ideogram.ai",
+                icon: "fa-font",
+                color: "text-yellow-400",
+                tags: ["Typography", "Logos", "Freemium"]
+            },
+            {
+                name: "Leonardo.ai",
+                category: "image",
+                description: "High-quality game assets and art with a generous daily free tier for creators.",
+                url: "https://leonardo.ai",
+                icon: "fa-gamepad",
+                color: "text-blue-400",
+                tags: ["Game Assets", "Free Tier", "Art"]
+            },
+            {
+                name: "DALL·E 3",
+                category: "image",
+                description: "Integrated into ChatGPT. Great for following complex instructions and ease of use.",
+                url: "https://openai.com/dall-e-3",
+                icon: "fa-robot",
+                color: "text-green-400",
+                tags: ["Easy", "ChatGPT", "Conversational"]
+            },
+
+            // Video Generators
+            {
+                name: "Opus Clip",
+                category: "video",
+                description: "Takes a long YouTube video and turns it into 10 viral shorts instantly. A must-have.",
+                url: "https://www.opus.pro",
+                icon: "fa-scissors",
+                color: "text-pink-400",
+                tags: ["Repurposing", "Shorts", "Viral"]
+            },
+            {
+                name: "InVideo AI",
+                category: "video",
+                description: "Type a prompt like 'Documentary about Mars', and it creates the full video with stock footage.",
+                url: "https://invideo.io",
+                icon: "fa-clapperboard",
+                color: "text-cyan-400",
+                tags: ["Text-to-Video", "Faceless", "YouTube"]
+            },
+            {
+                name: "Sora / Kling AI",
+                category: "video",
+                description: "The absolute cutting edge for cinematic, realistic video generation from text prompts.",
+                url: "https://openai.com/sora",
+                icon: "fa-film",
+                color: "text-indigo-400",
+                tags: ["Cinematic", "Realistic", "High-End"]
+            },
+            {
+                name: "Runway Gen-3",
+                category: "video",
+                description: "Professional tools for editors needing specific visual effects and video inpainting.",
+                url: "https://runwayml.com",
+                icon: "fa-wand-magic-sparkles",
+                color: "text-teal-400",
+                tags: ["Pro", "VFX", "Editing"]
+            },
+            {
+                name: "Pika Art",
+                category: "video",
+                description: "Great for animating static images or creating cute 3D animations and fun clips.",
+                url: "https://pika.art",
+                icon: "fa-ghost",
+                color: "text-purple-400",
+                tags: ["Animation", "Fun", "Image-to-Video"]
+            },
+
+            // Thumbnail Generators
+            {
+                name: "Canva Magic Studio",
+                category: "thumbnail",
+                description: "The gold standard. Use 'Magic Media' to generate assets and templates for high CTR.",
+                url: "https://www.canva.com",
+                icon: "fa-pen-nib",
+                color: "text-blue-500",
+                tags: ["Design", "Templates", "Easy"]
+            },
+            {
+                name: "Thumbnail.ai",
+                category: "thumbnail",
+                description: "A specialized tool that helps design and rates your thumbnail's potential CTR.",
+                url: "https://thumbnail.ai",
+                icon: "fa-image",
+                color: "text-red-400",
+                tags: ["CTR", "Analytics", "Optimization"]
+            },
+            {
+                name: "Adobe Express",
+                category: "thumbnail",
+                description: "Very fast, template-based generation using the powerful Firefly engine.",
+                url: "https://www.adobe.com/express/",
+                icon: "fa-bolt",
+                color: "text-indigo-500",
+                tags: ["Fast", "Professional", "Templates"]
+            },
+
+            // Audio/Voice
+            {
+                name: "ElevenLabs",
+                category: "voice",
+                description: "The most realistic AI voices in the world. Indistinguishable from humans. The G.O.A.T.",
+                url: "https://elevenlabs.io",
+                icon: "fa-microphone-lines",
+                color: "text-gray-200",
+                tags: ["Realistic", "Cloning", "Dubbing"]
+            },
+            {
+                name: "Murf.ai",
+                category: "voice",
+                description: "Great control over pitch and speed, perfect for professional corporate videos.",
+                url: "https://murf.ai",
+                icon: "fa-sliders",
+                color: "text-emerald-400",
+                tags: ["Corporate", "Control", "Voiceover"]
+            },
+            {
+                name: "Suno AI",
+                category: "voice",
+                description: "Generates full radio-quality songs (lyrics + vocals) from a simple text prompt.",
+                url: "https://suno.com",
+                icon: "fa-music",
+                color: "text-pink-500",
+                tags: ["Music", "Songs", "Audio"]
+            },
+            {
+                name: "AudioCraft",
+                category: "voice",
+                description: "Meta's tool for generating realistic sound effects (e.g., 'footsteps on snow').",
+                url: "https://audiocraft.metademolab.com",
+                icon: "fa-wave-square",
+                color: "text-yellow-200",
+                tags: ["SFX", "Sound Design", "Meta"]
+            },
+
+            // Script/Text
+            {
+                name: "Claude 3.5 Sonnet",
+                category: "script",
+                description: "Writes much more human-like, nuanced, and less 'robotic' scripts than competitors.",
+                url: "https://claude.ai",
+                icon: "fa-feather-pointed",
+                color: "text-orange-200",
+                tags: ["Writing", "Human-like", "Long-form"]
+            },
+            {
+                name: "ChatGPT-4o",
+                category: "script",
+                description: "Extremely versatile. Great for brainstorming ideas, formatting tables, and coding.",
+                url: "https://chat.openai.com",
+                icon: "fa-message",
+                color: "text-green-500",
+                tags: ["Versatile", "Brainstorming", "Coding"]
+            },
+            {
+                name: "Jasper",
+                category: "script",
+                description: "Built specifically for writing sales copy, ads, and video descriptions that actually sell.",
+                url: "https://www.jasper.ai",
+                icon: "fa-bullhorn",
+                color: "text-purple-500",
+                tags: ["Marketing", "Sales", "Copywriting"]
+            }
+        ];
+
+        const toolsGrid = document.getElementById('toolsGrid');
+        const searchInput = document.getElementById('searchInput');
+        let currentFilter = 'all';
+
+        function renderTools(toolsToRender) {
+            toolsGrid.innerHTML = '';
+
+            if (toolsToRender.length === 0) {
+                document.getElementById('noResults').classList.remove('hidden');
+            } else {
+                document.getElementById('noResults').classList.add('hidden');
+
+                toolsToRender.forEach((tool, index) => {
+                    const cleanUrl = tool.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+
+                    const card = document.createElement('div');
+                    card.className = 'glass-card rounded-2xl p-6 hover:bg-slate-800/80 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-500/10 group cursor-pointer border-t border-white/5';
+                    card.onclick = () => window.open(tool.url, '_blank');
+                    card.style.animation = `fadeIn 0.5s ease-out forwards ${index * 0.05}s`;
+                    card.style.opacity = '0'; // Initial state for animation
+
+                    const tagsHtml = tool.tags.map(tag =>
+                        `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-500/10 text-brand-400 border border-brand-500/20">${tag}</span>`
+                    ).join('');
+
+                    card.innerHTML = `
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-center text-2xl ${tool.color} group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-solid ${tool.icon}"></i>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-brand-500 transition-colors">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-400 transition-colors">${tool.name}</h3>
+                        <p class="text-slate-400 text-sm mb-4 line-clamp-2 h-10 leading-relaxed">${tool.description}</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            ${tagsHtml}
+                        </div>
+                    `;
+                    toolsGrid.appendChild(card);
+                });
+            }
+        }
+
+        function filterTools(category) {
+            currentFilter = category;
+
+            // Update buttons
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-brand-600', 'text-white', 'shadow-lg', 'ring-2', 'ring-brand-500');
+                btn.classList.add('bg-dark-card', 'text-slate-300');
+
+                // Add hover classes back if they were removed
+                btn.classList.add('hover:bg-brand-500/10', 'hover:text-brand-500');
+            });
+
+            // Style active button
+            const activeBtn = event.target;
+            activeBtn.classList.remove('bg-dark-card', 'text-slate-300', 'hover:bg-brand-500/10', 'hover:text-brand-500');
+            activeBtn.classList.add('active', 'bg-brand-600', 'text-white', 'shadow-lg', 'ring-2', 'ring-brand-500', 'ring-offset-2', 'ring-offset-[#0f172a]');
+
+            filterAndRender();
+        }
+
+        function filterAndRender() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            const filtered = tools.filter(tool => {
+                const matchesCategory = currentFilter === 'all' || tool.category === currentFilter;
+                const matchesSearch = tool.name.toLowerCase().includes(searchTerm) ||
+                    tool.description.toLowerCase().includes(searchTerm) ||
+                    tool.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+
+                return matchesCategory && matchesSearch;
+            });
+
+            renderTools(filtered);
+        }
+
+        // Initialize
+        renderTools(tools);
+
+        // Event Listeners
+        searchInput.addEventListener('input', filterAndRender);
+
+    </script>
+</body>
+
+</html>
