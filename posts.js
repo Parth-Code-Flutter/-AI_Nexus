@@ -58,5 +58,26 @@ const blogPosts = [
                  <p>Coming soon! A full case study on automation.</p>
             </div>
         `
+    },
+    {
+        id: "daily-news-jan-6",
+        title: "🚨 BREAKING: OpenAI Releases 'Sora' for Public Beta",
+        category: "News",
+        date: "Jan 6, 2026",
+        readTime: "2 min read",
+        imageIcon: "fa-bolt",
+        color: "text-yellow-400",
+        description: "The text-to-video model that shocked the world is finally available to everyone. Here is what you can create.",
+        content: `
+            <div class="prose prose-invert prose-lg max-w-none mb-16">
+                <p>It is finally here. After months of waiting, OpenAI has opened access to Sora.</p>
+                <h3>What is new?</h3>
+                <ul>
+                    <li>1080p generation speed increased by 2x</li>
+                    <li>Sound effects are now auto-generated</li>
+                    <li>New 'Director Mode' allows camera control</li>
+                </ul>
+            </div>
+        `
     }
 ];
