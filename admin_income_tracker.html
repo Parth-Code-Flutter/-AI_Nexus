@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneAIStop | Command Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        dark: { 900: '#0a0a0a', 800: '#171717', 700: '#262626', 600: '#404040' },
+                        brand: { 500: '#6366f1', 600: '#4f46e5' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+        }
+
+        .glass-panel {
+            background: rgba(23, 23, 23, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hover-card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.2);
+        }
+
+        .search-glow:focus-within {
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5), 0 0 20px rgba(99, 102, 241, 0.3);
+            border-color: #6366f1;
+        }
+
+        .verified-badge {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-950 font-sans text-slate-300">
+
+    <!-- Login Gate (Overlay) -->
+    <div id="loginOverlay" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center">
+            <div
+                class="w-16 h-16 bg-brand-500/10 text-brand-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-white mb-2">Restricted Access</h2>
+            <p class="text-slate-500 mb-6 text-sm">Enter admin credentials to continue.</p>
+
+            <form onsubmit="checkLogin(event)" class="space-y-4">
+                <input type="password" id="passwordInput" placeholder="Password"
+                    class="w-full bg-slate-950 border border-slate-800 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-brand-500 transition-colors">
+                <button type="submit"
+                    class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 rounded-lg transition-all">
+                    Unlock Dashboard
+                </button>
+                <p id="loginError" class="text-red-500 text-xs hidden animate-pulse">Access Denied</p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Check if already logged in
+        if (sessionStorage.getItem('admin_auth') === 'true') {
+            document.getElementById('loginOverlay').style.display = 'none';
+        }
+
+        function checkLogin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('passwordInput').value;
+            // HARDCODED CREDENTIALS
+            if (pass === 'money2026') {
+                sessionStorage.setItem('admin_auth', 'true');
+                document.getElementById('loginOverlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loginOverlay').style.display = 'none';
+                }, 500);
+            } else {
+                const err = document.getElementById('loginError');
+                err.classList.remove('hidden');
+                document.getElementById('passwordInput').classList.add('border-red-500');
+            }
+        }
+    </script>
+
+    <!-- Main Content (Standard Layout) -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Top Navigation Bar -->
+        <nav class="border-b border-dark-700 bg-dark-900/80 backdrop-blur-xl sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-brand-500/20">
+                        OA</div>
+                    <div>
+                        <h1 class="font-semibold text-sm tracking-wide text-white">OneAIStop <span
+                                class="text-neutral-500">Admin</span></h1>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <!-- Social Traffic Sources -->
+                    <div class="hidden md:flex items-center gap-2 mr-2 border-r border-dark-700 pr-4">
+                        <a href="https://www.reddit.com/r/ArtificialIntelligence/" target="_blank"
+                            class="text-neutral-500 hover:text-[#FF4500] transition"><i
+                                class="fa-brands fa-reddit text-lg"></i></a>
+                        <a href="https://twitter.com" target="_blank"
+                            class="text-neutral-500 hover:text-white transition"><i
+                                class="fa-brands fa-x-twitter text-lg"></i></a>
+                        <a href="https://www.linkedin.com" target="_blank"
+                            class="text-neutral-500 hover:text-[#0077b5] transition"><i
+                                class="fa-brands fa-linkedin text-lg"></i></a>
+                        <a href="https://www.quora.com" target="_blank"
+                            class="text-neutral-500 hover:text-[#B92B27] transition"><i
+                                class="fa-brands fa-quora text-lg"></i></a>
+                        <a href="https://www.producthunt.com" target="_blank"
+                            class="text-neutral-500 hover:text-[#DA552F] transition"><i
+                                class="fa-brands fa-product-hunt text-lg"></i></a>
+                    </div>
+
+                    <div
+                        class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-dark-800 border border-dark-700 text-xs font-medium text-neutral-400">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        System Operational
+                    </div>
+                    <!-- Divider -->
+                    <div class="h-6 w-px bg-dark-700 mx-1"></div>
+
+                    <!-- Main Actions -->
+                    <a href="https://dash.partnerstack.com/home" target="_blank"
+                        class="text-xs font-medium bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-md transition flex items-center gap-2 shadow-lg shadow-brand-500/20">
+                        <i class="fa-solid fa-sack-dollar"></i> dash.partnerstack.com
+                    </a>
+                    <a href="https://analytics.google.com/analytics/web/" target="_blank"
+                        class="text-xs font-medium bg-white text-black hover:bg-neutral-200 px-3 py-1.5 rounded-md transition flex items-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> Live Traffic
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 max-w-7xl mx-auto px-6 py-10 w-full">
+
+            <!-- Header & Search -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold text-white mb-2 tracking-tight">Revenue Channels</h2>
+                    <p class="text-neutral-500 text-sm">Manage your affiliate partnerships and application status.</p>
+                </div>
+
+                <div class="relative w-full md:w-96 group">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-search text-neutral-500 text-sm"></i>
+                    </div>
+                    <input type="text" id="searchInput" placeholder="Search programs (Ctrl+K)"
+                        class="w-full bg-dark-800 border border-dark-700 text-white text-sm rounded-lg block pl-10 p-2.5 search-glow outline-none transition-all placeholder-neutral-600"
+                        autocomplete="off">
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <kbd
+                            class="inline-flex items-center border border-dark-600 rounded px-2 text-xs font-sans font-medium text-neutral-500">⌘K</kbd>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                <div class="glass-panel p-4 rounded-xl border-l-4 border-l-brand-500">
+                    <p class="text-neutral-500 text-xs font-medium uppercase tracking-wider mb-1">Potential CPA</p>
+                    <p class="text-2xl font-bold text-white">₹1,600+</p>
+                </div>
+                <div class="glass-panel p-4 rounded-xl border-l-4 border-l-green-500">
+                    <p class="text-neutral-500 text-xs font-medium uppercase tracking-wider mb-1">Rev Share</p>
+                    <p class="text-2xl font-bold text-white">Up to 45%</p>
+                </div>
+                <div class="glass-panel p-4 rounded-xl border-l-4 border-l-orange-500">
+                    <p class="text-neutral-500 text-xs font-medium uppercase tracking-wider mb-1">Programs</p>
+                    <p class="text-2xl font-bold text-white" id="programCount">12</p>
+                </div>
+            </div>
+
+            <!-- Grid Layout -->
+            <div id="gridArea" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Cards Injected Here -->
+            </div>
+
+        </main>
+
+        <script>
+            const programs = [
+                { id: 'descript', name: 'Descript', platform: 'PartnerStack', commission: '15% Recurring', url: 'https://app.partnerstack.com/partners/descript/apply', icon: 'fa-headphones', color: 'text-blue-400', popular: true },
+                { id: 'copyai', name: 'Copy.ai', platform: 'In-House', commission: '45% 1st Year', url: 'https://affiliates.copy.ai/apply', icon: 'fa-pen-fancy', color: 'text-emerald-400', popular: true },
+                { id: 'writesonic', name: 'Writesonic', platform: 'In-House', commission: '30% Lifetime', url: 'https://writesonic.com/affiliate-program', icon: 'fa-pencil', color: 'text-orange-400', popular: false },
+                { id: 'grammarly', name: 'Grammarly', platform: 'PartnerStack', commission: '₹1,600 CPA', url: 'https://www.grammarly.com/affiliates', icon: 'fa-spell-check', color: 'text-green-400', popular: true },
+                { id: 'synthesia', name: 'Synthesia', platform: 'PartnerStack', commission: '20% Recurring', url: 'https://www.synthesia.io/affiliate', icon: 'fa-user-tie', color: 'text-indigo-400', popular: false },
+                { id: 'notion', name: 'Notion', platform: 'PartnerStack', commission: '50% 1st Year', url: 'https://www.notion.so/affiliates', icon: 'fa-book', color: 'text-neutral-200', popular: true },
+                { id: 'elevenlabs', name: 'ElevenLabs', platform: 'Impact', commission: 'High Variable', url: 'https://elevenlabs.io/affiliate', icon: 'fa-microphone-lines', color: 'text-indigo-400', popular: true },
+                { id: 'fiverr', name: 'Fiverr', platform: 'In-House', commission: '10-50%', url: 'https://affiliates.fiverr.com/', icon: 'fa-briefcase', color: 'text-green-500', popular: false },
+                { id: 'heygen', name: 'HeyGen', platform: 'PartnerStack', commission: '20% Recurring', url: 'https://heygen.partnerstack.com/application', icon: 'fa-user-tie', color: 'text-indigo-400', popular: true },
+                { id: 'invideo', name: 'InVideo', platform: 'Impact', commission: '25-50% Sale', url: 'https://invideo.io/affiliate/', icon: 'fa-clapperboard', color: 'text-cyan-400', popular: false },
+                { id: 'canva', name: 'Canva', platform: 'Impact', commission: 'Bounties', url: 'https://www.canva.com/affiliates/', icon: 'fa-pen-nib', color: 'text-blue-500', popular: false },
+                { id: 'murf', name: 'Murf.ai', platform: 'Impact', commission: '20% Recurring', url: 'https://murf.ai/affiliate', icon: 'fa-sliders', color: 'text-lime-400', popular: false }
+            ];
+
+            document.getElementById('programCount').innerText = programs.length;
+
+            const gridArea = document.getElementById('gridArea');
+            const searchInput = document.getElementById('searchInput');
+
+            function renderCards(items) {
+                gridArea.innerHTML = '';
+
+                if (items.length === 0) {
+                    gridArea.innerHTML = `
+                    <div class="col-span-3 text-center py-20 opacity-50">
+                        <i class="fa-solid fa-wind text-4xl mb-4 text-neutral-600"></i>
+                        <p class="text-neutral-400">No programs found.</p>
+                        <a href="https://www.google.com/search?q=${searchInput.value}+affiliate+program" target="_blank" class="text-brand-500 hover:underline text-sm mt-2 block">Search '${searchInput.value}' on Google &rarr;</a>
+                    </div>
+                 `;
+                    return;
+                }
+
+                items.forEach(item => {
+                    const popularBadge = item.popular ? `<span class="absolute top-3 right-3 bg-brand-500/10 text-brand-400 text-[10px] font-bold px-2 py-0.5 rounded border border-brand-500/20 uppercase tracking-wide">Hot</span>` : '';
+
+                    gridArea.innerHTML += `
+                    <div class="glass-panel rounded-xl p-5 relative hover-card transition-all duration-300 group flex flex-col justify-between h-full">
+                        ${popularBadge}
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-lg bg-dark-800 border border-dark-700 flex items-center justify-center text-xl shadow-inner ${item.color}">
+                                    <i class="fa-solid ${item.icon}"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-white text-base">${item.name}</h3>
+                                    <p class="text-xs text-neutral-500">${item.platform}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-dark-900/50 rounded-lg p-3 border border-dark-700/50 mb-4">
+                                <p class="text-neutral-500 text-xs uppercase font-semibold mb-1">Commission</p>
+                                <p class="text-green-400 font-mono text-sm font-medium">${item.commission}</p>
+                            </div>
+                        </div>
+
+                        <a href="${item.url}" target="_blank" class="w-full bg-white hover:bg-neutral-200 text-black text-sm font-medium py-2 rounded-lg transition-colors flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-brand-500/10">
+                            Apply Now <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-50 group-hover:opacity-100 transition-opacity"></i>
+                        </a>
+                    </div>
+                `;
+                });
+            }
+
+            renderCards(programs);
+
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const filtered = programs.filter(p => p.name.toLowerCase().includes(query));
+                renderCards(filtered);
+            });
+
+            // Keyboard Shortcut
+            document.addEventListener('keydown', (e) => {
+                if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+            });
+        </script>
+</body>
+
+</html>
