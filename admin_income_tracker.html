@@ -4,298 +4,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OneAIStop Admin Command</title>
+    <title>OneAIStop / Command</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Outfit', 'sans-serif'] },
+                    colors: {
+                        dark: { 900: '#0B0F19', 800: '#111827', 700: '#1F2937' },
+                        brand: { 500: '#6366F1', 400: '#818CF8', 600: '#4F46E5' }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(99, 102, 241, 0.4)',
+                        'glow': '0 0 10px rgba(255, 255, 255, 0.1)'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: #020617;
+            background: #0B0F19;
         }
 
-        /* Glassmorphism Utilities */
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        .sidebar-link {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .glass-sidebar {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(24px);
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        .sidebar-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #6366F1;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
         }
 
-        .nav-item.active {
-            background: linear-gradient(90deg, rgba(79, 70, 229, 0.2) 0%, rgba(79, 70, 229, 0) 100%);
-            border-left: 3px solid #6366f1;
-            color: #fff;
+        .sidebar-link.active {
+            background: rgba(99, 102, 241, 0.1);
+            color: white;
         }
 
-        .nav-item {
-            border-left: 3px solid transparent;
-            color: #94a3b8;
+        .sidebar-link.active::before {
+            transform: scaleY(1);
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
 
-        .animate-fade-in {
-            animation: fadeIn 0.4s ease-out forwards;
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
+        .status-badge {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 4px 8px;
+            border-radius: 99px;
+            transition: all 0.2s;
+            cursor: pointer;
         }
 
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
+        .status-pending {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60A5FA;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 3px;
+        .status-applied {
+            background: rgba(234, 179, 8, 0.1);
+            color: #FACC15;
+            border: 1px solid rgba(234, 179, 8, 0.2);
+        }
+
+        .status-approved {
+            background: rgba(34, 197, 94, 0.1);
+            color: #4ADE80;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.1);
         }
     </style>
 </head>
 
-<body class="text-slate-300 antialiased h-screen flex overflow-hidden selection:bg-indigo-500 selection:text-white">
+<body class="text-slate-300 antialiased h-screen flex overflow-hidden">
 
-    <!-- LOGIN OVERLAY -->
-    <div id="loginOverlay" class="fixed inset-0 z-[100] bg-[#020617] flex items-center justify-center p-4">
-        <div
-            class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none">
-        </div>
-        <div class="glass-panel p-8 rounded-2xl max-w-sm w-full text-center relative z-10">
+    <!-- LOGIN GATE -->
+    <div id="loginOverlay" class="fixed inset-0 z-[100] bg-[#0B0F19] flex items-center justify-center p-4">
+        <div class="glass-card p-10 rounded-2xl max-w-sm w-full text-center relative overflow-hidden">
             <div
-                class="w-16 h-16 bg-indigo-500/10 text-indigo-400 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl animate-pulse">
-                <i class="fa-solid fa-layer-group"></i>
+                class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-500 to-transparent">
             </div>
-            <h2 class="text-2xl font-bold text-white mb-2">Command Center</h2>
-            <p class="text-slate-500 mb-6 text-xs uppercase tracking-widest">Restricted Access</p>
-
-            <form onsubmit="checkLogin(event)" class="space-y-4">
-                <div class="relative group">
-                    <i
-                        class="fa-solid fa-user absolute left-4 top-3.5 text-slate-500 group-focus-within:text-indigo-400 transition-colors text-sm"></i>
-                    <input type="text" id="usernameInput" placeholder="Agent ID"
-                        class="w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl pl-10 pr-4 py-3 focus:outline-none focus:border-indigo-500 focus:bg-slate-900 transition-all text-sm font-medium placeholder:text-slate-600">
-                </div>
-                <div class="relative group">
-                    <i
-                        class="fa-solid fa-key absolute left-4 top-3.5 text-slate-500 group-focus-within:text-indigo-400 transition-colors text-sm"></i>
-                    <input type="password" id="passwordInput" placeholder="Access Key"
-                        class="w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl pl-10 pr-4 py-3 focus:outline-none focus:border-indigo-500 focus:bg-slate-900 transition-all text-sm font-medium placeholder:text-slate-600">
-                </div>
+            <div
+                class="w-16 h-16 bg-brand-500/10 text-brand-400 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl shadow-neon">
+                <i class="fa-solid fa-fingerprint"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-white mb-2">System Locked</h2>
+            <form onsubmit="checkLogin(event)" class="space-y-4 mt-6">
+                <input type="text" id="usernameInput" placeholder="Agent ID"
+                    class="w-full bg-dark-800 border border-dark-700 text-white rounded-lg px-4 py-3 focus:border-brand-500 outline-none transition-colors">
+                <input type="password" id="passwordInput" placeholder="Passkey"
+                    class="w-full bg-dark-800 border border-dark-700 text-white rounded-lg px-4 py-3 focus:border-brand-500 outline-none transition-colors">
                 <button type="submit"
-                    class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transform hover:-translate-y-0.5">
-                    Initialize Session
-                </button>
-                <p id="loginError" class="text-red-400 text-xs hidden font-medium mt-2"><i
-                        class="fa-solid fa-circle-exclamation mr-1"></i> Authentication Failed</p>
+                    class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 rounded-lg shadow-lg shadow-brand-500/20 transition-all">Unlock
+                    System</button>
+                <p id="loginError" class="text-red-500 text-xs hidden">Invalid credentials</p>
             </form>
         </div>
     </div>
-    <!-- END LOGIN -->
 
     <!-- SIDEBAR -->
-    <aside class="w-64 glass-sidebar flex-col justify-between hidden md:flex z-50">
-        <div>
-            <!-- Brand -->
-            <div class="h-20 flex items-center px-8 border-b border-white/5">
-                <div
-                    class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-indigo-500/30 mr-3">
-                    OA</div>
-                <span class="font-bold text-white tracking-wide">OneAIStop</span>
-            </div>
-
-            <!-- Nav -->
-            <nav class="mt-8 space-y-1">
-                <button onclick="switchView('income')" id="nav-income"
-                    class="nav-item active w-full flex items-center px-8 py-4 transition-all hover:bg-white/5 group">
-                    <i class="fa-solid fa-wallet w-6 group-hover:text-white transition-colors"></i>
-                    <span class="font-medium text-sm">Income Tracker</span>
-                </button>
-                <button onclick="switchView('social')" id="nav-social"
-                    class="nav-item w-full flex items-center px-8 py-4 transition-all hover:bg-white/5 group">
-                    <i class="fa-brands fa-twitter w-6 group-hover:text-white transition-colors"></i>
-                    <span class="font-medium text-sm">Tweet Generator</span>
-                </button>
-                <button
-                    class="nav-item w-full flex items-center px-8 py-4 transition-all hover:bg-white/5 group opacity-50 cursor-not-allowed">
-                    <i class="fa-solid fa-chart-line w-6"></i>
-                    <span class="font-medium text-sm">Analytics (Soon)</span>
-                </button>
-            </nav>
+    <aside class="w-64 bg-dark-800 border-r border-dark-700 flex flex-col z-50">
+        <div class="h-20 flex items-center px-6 border-b border-dark-700/50">
+            <div
+                class="w-8 h-8 rounded bg-gradient-to-br from-brand-600 to-purple-600 flex items-center justify-center text-white font-bold text-xs shadow-lg mr-3">
+                OA</div>
+            <span class="font-bold text-white tracking-wide">OneAIStop</span>
         </div>
 
-        <div class="p-6 border-t border-white/5">
-            <div class="flex items-center gap-3">
-                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]">
+        <nav class="flex-1 py-6 space-y-1 px-3">
+            <p class="px-3 text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Modules</p>
+            <button onclick="switchView('income')" id="nav-income"
+                class="sidebar-link active w-full flex items-center px-4 py-3 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 gap-3">
+                <i class="fa-solid fa-money-bill-transfer w-5"></i> Income
+            </button>
+            <button onclick="switchView('social')" id="nav-social"
+                class="sidebar-link w-full flex items-center px-4 py-3 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 gap-3">
+                <i class="fa-brands fa-twitter w-5"></i> Viral Post
+            </button>
+            <button
+                class="sidebar-link w-full flex items-center px-4 py-3 rounded-lg text-slate-500 hover:text-slate-400 cursor-not-allowed gap-3">
+                <i class="fa-solid fa-chart-pie w-5"></i> Analytics <span
+                    class="text-[10px] bg-dark-700 px-1.5 py-0.5 rounded ml-auto">SOON</span>
+            </button>
+        </nav>
+
+        <div class="p-4 border-t border-dark-700/50">
+            <div class="bg-dark-900 rounded-lg p-3 flex items-center gap-3 border border-dark-700">
+                <img src="https://ui-avatars.com/api/?name=Admin+User&background=6366F1&color=fff"
+                    class="w-8 h-8 rounded-full">
+                <div>
+                    <p class="text-xs font-bold text-white">Administrator</p>
+                    <p class="text-[10px] text-green-400">● Online</p>
                 </div>
-                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">System Online</span>
             </div>
         </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
-    <main
-        class="flex-1 overflow-y-auto bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-opacity-5 relative">
-        <div
-            class="absolute inset-0 bg-gradient-to-br from-indigo-900/10 via-transparent to-slate-900/40 pointer-events-none">
-        </div>
+    <!-- CONTENT -->
+    <main class="flex-1 overflow-y-auto relative">
+        <!-- Aurora Background -->
+        <div class="fixed top-0 left-0 right-0 h-96 bg-brand-900/10 blur-[100px] pointer-events-none"></div>
 
-        <div class="max-w-7xl mx-auto px-8 py-10 relative z-10">
+        <div class="max-w-7xl mx-auto px-8 py-10 relative z-10 animate-fade-in">
 
-            <!-- INCOME VIEW -->
-            <div id="view-income" class="animate-fade-in">
-                <div class="flex justify-between items-end mb-10">
+            <!-- INCOME -->
+            <div id="view-income">
+                <header class="flex justify-between items-end mb-8">
                     <div>
-                        <h1 class="text-3xl font-bold text-white mb-2">Revenue Streams</h1>
-                        <p class="text-slate-500 text-sm">Active affiliate channels • <span class="text-green-400">Total
-                                Potential: ₹1.6k+</span></p>
+                        <h1 class="text-3xl font-bold text-white mb-2">Income & Affiliates</h1>
+                        <p class="text-slate-400 text-sm">Track your progress. Total Potential: <span
+                                class="text-green-400 font-bold">₹1.6k+</span></p>
                     </div>
-                    <div class="flex gap-4">
-                        <a href="https://dash.partnerstack.com" target="_blank"
-                            class="glass-panel px-4 py-2 rounded-lg text-xs font-bold text-indigo-300 hover:text-white hover:border-indigo-500/50 transition-all flex items-center gap-2">
-                            <i class="fa-solid fa-external-link-alt"></i> PartnerStack
-                        </a>
+                    <div class="relative">
+                        <i class="fa-solid fa-search absolute left-3 top-3 text-slate-500 text-sm"></i>
+                        <input type="text" id="searchProg" onkeyup="filterPrograms()" placeholder="Search..."
+                            class="bg-dark-800 border border-dark-700 text-white text-sm rounded-lg pl-9 pr-4 py-2.5 w-64 focus:border-brand-500 outline-none">
                     </div>
+                </header>
+
+                <!-- Status Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <div class="glass-card p-4 rounded-xl border-l-2 border-l-brand-500">
+                        <p class="text-xs text-slate-500 uppercase font-bold">Approved</p>
+                        <p class="text-2xl font-bold text-white" id="stat-approved">0</p>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl border-l-2 border-l-yellow-500">
+                        <p class="text-xs text-slate-500 uppercase font-bold">Applied</p>
+                        <p class="text-2xl font-bold text-white" id="stat-applied">0</p>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl border-l-2 border-l-slate-500">
+                        <p class="text-xs text-slate-500 uppercase font-bold">Pending</p>
+                        <p class="text-2xl font-bold text-white" id="stat-pending">14</p>
+                    </div>
+                    <a href="https://dash.partnerstack.com" target="_blank"
+                        class="glass-card p-4 rounded-xl flex items-center justify-between group cursor-pointer hover:bg-brand-600 hover:border-brand-500 transition-colors">
+                        <div>
+                            <p class="text-xs text-slate-500 group-hover:text-white/80 uppercase font-bold">PartnerStack
+                            </p>
+                            <p class="text-sm font-bold text-white">Open Dashboard</p>
+                        </div>
+                        <i class="fa-solid fa-arrow-right text-slate-500 group-hover:text-white"></i>
+                    </a>
                 </div>
 
-                <!-- Three Big Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                    <div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
-                        <div
-                            class="absolute -right-6 -top-6 w-24 h-24 bg-indigo-500/20 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition-all">
-                        </div>
-                        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Top Commission</p>
-                        <p class="text-3xl font-bold text-white">₹1,600</p>
-                        <p class="text-xs text-indigo-400 mt-1">per sale (Grammarly)</p>
-                    </div>
-                    <div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
-                        <div
-                            class="absolute -right-6 -top-6 w-24 h-24 bg-purple-500/20 rounded-full blur-2xl group-hover:bg-purple-500/30 transition-all">
-                        </div>
-                        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Best Rev Share</p>
-                        <p class="text-3xl font-bold text-white">45%</p>
-                        <p class="text-xs text-purple-400 mt-1">Recurring (Copy.ai)</p>
-                    </div>
-                    <div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
-                        <div
-                            class="absolute -right-6 -top-6 w-24 h-24 bg-green-500/20 rounded-full blur-2xl group-hover:bg-green-500/30 transition-all">
-                        </div>
-                        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Total Programs</p>
-                        <p class="text-3xl font-bold text-white" id="progCount">0</p>
-                        <p class="text-xs text-green-400 mt-1">Active</p>
-                    </div>
-                </div>
-
-                <!-- Grid -->
-                <div id="gridArea" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Program Grid -->
+                <div id="programGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     <!-- JS Injected -->
                 </div>
             </div>
 
-            <!-- SOCIAL VIEW -->
-            <div id="view-social" class="hidden animate-fade-in">
-                <div class="flex justify-between items-end mb-10">
-                    <div>
-                        <h1 class="text-3xl font-bold text-white mb-2">Viral Generator</h1>
-                        <p class="text-slate-500 text-sm">Create high-engagement tweets for your tools.</p>
-                    </div>
-                </div>
+            <!-- SOCIAL -->
+            <div id="view-social" class="hidden">
+                <header class="mb-8">
+                    <h1 class="text-3xl font-bold text-white mb-2">Viral Generator</h1>
+                    <p class="text-slate-400 text-sm">Generate infinite content for Twitter/X.</p>
+                </header>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Controls -->
-                    <div class="glass-panel p-8 rounded-2xl">
+                    <!-- Config -->
+                    <div class="glass-card p-6 rounded-xl">
                         <div class="space-y-6">
                             <div>
-                                <label
-                                    class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Target
-                                    Tool</label>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-3">Select Tool</label>
                                 <div class="grid grid-cols-2 gap-3">
                                     <button onclick="selectTool('Lovable', this)"
-                                        class="tool-btn active bg-indigo-600/20 border border-indigo-500/50 text-white p-3 rounded-xl text-sm font-medium transition-all text-left flex items-center gap-2">
-                                        <i class="fa-solid fa-code text-indigo-400"></i> Lovable
-                                    </button>
+                                        class="social-tool active bg-brand-500/20 border border-brand-500/50 text-white p-3 rounded-lg text-sm text-left transition-all">Lovable</button>
                                     <button onclick="selectTool('Cursor', this)"
-                                        class="tool-btn bg-slate-800/50 border border-slate-700/50 text-slate-400 hover:text-white p-3 rounded-xl text-sm font-medium transition-all text-left flex items-center gap-2">
-                                        <i class="fa-solid fa-terminal text-slate-500"></i> Cursor
-                                    </button>
+                                        class="social-tool bg-dark-800 border border-dark-700 text-slate-400 p-3 rounded-lg text-sm text-left hover:bg-dark-700 transition-all">Cursor</button>
                                     <button onclick="selectTool('Descript', this)"
-                                        class="tool-btn bg-slate-800/50 border border-slate-700/50 text-slate-400 hover:text-white p-3 rounded-xl text-sm font-medium transition-all text-left flex items-center gap-2">
-                                        <i class="fa-solid fa-video text-slate-500"></i> Descript
-                                    </button>
+                                        class="social-tool bg-dark-800 border border-dark-700 text-slate-400 p-3 rounded-lg text-sm text-left hover:bg-dark-700 transition-all">Descript</button>
                                     <button onclick="selectTool('ElevenLabs', this)"
-                                        class="tool-btn bg-slate-800/50 border border-slate-700/50 text-slate-400 hover:text-white p-3 rounded-xl text-sm font-medium transition-all text-left flex items-center gap-2">
-                                        <i class="fa-solid fa-microphone text-slate-500"></i> ElevenLabs
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between mb-3">
-                                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Vibe
-                                        Check</label>
-                                </div>
-                                <div class="flex bg-slate-900/50 p-1 rounded-xl border border-slate-700/50">
-                                    <button onclick="setVibe('viral')" id="btn-viral"
-                                        class="flex-1 py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold shadow-lg transition-all">🔥
-                                        Viral/Hype</button>
-                                    <button onclick="setVibe('pro')" id="btn-pro"
-                                        class="flex-1 py-2 rounded-lg text-slate-400 hover:text-white text-xs font-bold transition-all">💼
-                                        Professional</button>
+                                        class="social-tool bg-dark-800 border border-dark-700 text-slate-400 p-3 rounded-lg text-sm text-left hover:bg-dark-700 transition-all">ElevenLabs</button>
                                 </div>
                             </div>
 
                             <button onclick="generateTweet()"
-                                class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-4 rounded-xl shadow-xl shadow-indigo-600/20 transform active:scale-95 transition-all text-sm uppercase tracking-wide">
-                                <i class="fa-solid fa-wand-magic-sparkles mr-2 animate-pulse"></i> Generate Content
+                                class="w-full bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-brand-500/20 transform active:scale-[0.98] transition-all">
+                                <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Generate Magic
                             </button>
                         </div>
                     </div>
 
                     <!-- Preview -->
-                    <div class="glass-panel p-8 rounded-2xl relative flex flex-col justify-between min-h-[300px]">
+                    <div class="glass-card p-6 rounded-xl flex flex-col justify-between h-[300px]">
                         <div>
-                            <div class="flex items-center gap-3 mb-6">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-slate-700 border border-slate-600 flex items-center justify-center">
-                                    <i class="fa-solid fa-user text-slate-400"></i>
-                                </div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-full bg-slate-700 border border-slate-600"></div>
                                 <div>
-                                    <p class="text-white font-bold text-sm">OneAIStop</p>
-                                    <p class="text-slate-500 text-xs">@OneAIStop</p>
+                                    <div class="h-3 w-24 bg-slate-700 rounded mb-1"></div>
+                                    <div class="h-2 w-16 bg-slate-800 rounded"></div>
                                 </div>
-                                <i class="fa-brands fa-twitter text-slate-600 ml-auto"></i>
                             </div>
                             <textarea id="tweetOutput"
-                                class="w-full h-40 bg-transparent text-lg md:text-xl text-white font-medium resize-none focus:outline-none placeholder:text-slate-700"
-                                placeholder="Your viral tweet will appear here..."></textarea>
+                                class="w-full h-32 bg-transparent text-xl text-white font-medium resize-none focus:outline-none placeholder:text-slate-700"
+                                placeholder="AI Magic will appear here..."></textarea>
                         </div>
-
-                        <div class="flex items-center justify-between border-t border-white/5 pt-4">
-                            <span class="text-slate-600 text-xs">0 characters</span>
-                            <button onclick="copyTweet()"
-                                class="bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 hover:text-indigo-300 px-4 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2">
-                                <i class="fa-regular fa-copy"></i> Copy
-                            </button>
-                        </div>
+                        <button onclick="copyTweet()"
+                            class="self-end text-brand-400 hover:text-brand-300 font-bold text-sm"><i
+                                class="fa-regular fa-copy mr-1"></i> Copy to Clipboard</button>
                     </div>
                 </div>
             </div>
@@ -304,141 +277,128 @@
     </main>
 
     <script>
-        // --- AUTH ---
-        if (sessionStorage.getItem('admin_auth') === 'true') {
-            document.getElementById('loginOverlay').style.display = 'none';
-        }
+        // AUTH
+        if (sessionStorage.getItem('admin_auth') === 'true') document.getElementById('loginOverlay').style.display = 'none';
         function checkLogin(e) {
             e.preventDefault();
-            const u = document.getElementById('usernameInput').value;
-            const p = document.getElementById('passwordInput').value;
-            if (u === 'Admin@26' && p === 'Admin@#&.2626') {
+            if (document.getElementById('usernameInput').value === 'Admin@26' && document.getElementById('passwordInput').value === 'Admin@#&.2626') {
                 sessionStorage.setItem('admin_auth', 'true');
                 document.getElementById('loginOverlay').style.display = 'none';
-            } else {
-                document.getElementById('loginError').classList.remove('hidden');
-                document.getElementById('loginOverlay').querySelector('.glass-panel').classList.add('animate-pulse');
-                setTimeout(() => document.getElementById('loginOverlay').querySelector('.glass-panel').classList.remove('animate-pulse'), 500);
-            }
+            } else { document.getElementById('loginError').classList.remove('hidden'); }
         }
 
-        // --- NAVIGATION ---
+        // NAV
         function switchView(view) {
-            // Updating Nav UI
-            document.querySelectorAll('.nav-item').forEach(el => {
-                el.classList.remove('active');
-                el.classList.add('text-slate-400');
-            });
+            document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
             document.getElementById('nav-' + view).classList.add('active');
-
-            // Switching Content
             document.getElementById('view-income').classList.add('hidden');
             document.getElementById('view-social').classList.add('hidden');
             document.getElementById('view-' + view).classList.remove('hidden');
         }
 
-        // --- INCOME DATA ---
+        // PROGRAMS
         const programs = [
-            { id: 'descript', name: 'Descript', platform: 'PartnerStack', commission: '15% Recurring', url: 'https://app.partnerstack.com/partners/descript/apply', icon: 'fa-headphones', color: 'text-blue-400', popular: true },
-            { id: 'copyai', name: 'Copy.ai', platform: 'In-House', commission: '45% 1st Year', url: 'https://affiliates.copy.ai/apply', icon: 'fa-pen-fancy', color: 'text-emerald-400', popular: true },
-            { id: 'writesonic', name: 'Writesonic', platform: 'In-House', commission: '30% Lifetime', url: 'https://writesonic.com/affiliate-program', icon: 'fa-pencil', color: 'text-orange-400', popular: false },
-            { id: 'grammarly', name: 'Grammarly', platform: 'PartnerStack', commission: '₹1,600 CPA', url: 'https://www.grammarly.com/affiliates', icon: 'fa-spell-check', color: 'text-green-400', popular: true },
-            { id: 'synthesia', name: 'Synthesia', platform: 'PartnerStack', commission: '20% Recurring', url: 'https://www.synthesia.io/affiliate', icon: 'fa-user-tie', color: 'text-indigo-400', popular: false },
-            { id: 'notion', name: 'Notion', platform: 'PartnerStack', commission: '50% 1st Year', url: 'https://www.notion.so/affiliates', icon: 'fa-book', color: 'text-neutral-200', popular: true },
-            { id: 'elevenlabs', name: 'ElevenLabs', platform: 'Impact', commission: 'High Variable', url: 'https://elevenlabs.io/affiliate', icon: 'fa-microphone-lines', color: 'text-indigo-400', popular: true },
-            { id: 'fiverr', name: 'Fiverr', platform: 'In-House', commission: '10-50%', url: 'https://affiliates.fiverr.com/', icon: 'fa-briefcase', color: 'text-green-500', popular: false },
-            { id: 'heygen', name: 'HeyGen', platform: 'PartnerStack', commission: '20% Recurring', url: 'https://heygen.partnerstack.com/application', icon: 'fa-user-tie', color: 'text-indigo-400', popular: true },
-            { id: 'invideo', name: 'InVideo', platform: 'Impact', commission: '25-50% Sale', url: 'https://invideo.io/affiliate/', icon: 'fa-clapperboard', color: 'text-cyan-400', popular: false },
-            { id: 'canva', name: 'Canva', platform: 'Impact', commission: 'Bounties', url: 'https://www.canva.com/affiliates/', icon: 'fa-pen-nib', color: 'text-blue-500', popular: false },
-            { id: 'murf', name: 'Murf.ai', platform: 'Impact', commission: '20% Recurring', url: 'https://murf.ai/affiliate', icon: 'fa-sliders', color: 'text-lime-400', popular: false },
-            { id: 'lovable', name: 'Lovable', platform: 'In-House', commission: '20% Recurring', url: '#', icon: 'fa-heart', color: 'text-pink-400', popular: true },
-            { id: 'cursor', name: 'Cursor', platform: 'In-House', commission: 'Referral', url: '#', icon: 'fa-terminal', color: 'text-slate-200', popular: true }
+            { id: 'descript', name: 'Descript', platform: 'PartnerStack', commission: '15% Recurring', url: 'https://app.partnerstack.com/partners/descript/apply', icon: 'fa-headphones', color: 'text-blue-400' },
+            { id: 'copyai', name: 'Copy.ai', platform: 'In-House', commission: '45% 1st Year', url: 'https://affiliates.copy.ai/apply', icon: 'fa-pen-fancy', color: 'text-emerald-400' },
+            { id: 'writesonic', name: 'Writesonic', platform: 'In-House', commission: '30% Lifetime', url: 'https://writesonic.com/affiliate-program', icon: 'fa-pencil', color: 'text-orange-400' },
+            { id: 'grammarly', name: 'Grammarly', platform: 'PartnerStack', commission: '₹1,600 CPA', url: 'https://www.grammarly.com/affiliates', icon: 'fa-spell-check', color: 'text-green-400' },
+            { id: 'synthesia', name: 'Synthesia', platform: 'PartnerStack', commission: '20% Recurring', url: 'https://www.synthesia.io/affiliate', icon: 'fa-user-tie', color: 'text-indigo-400' },
+            { id: 'notion', name: 'Notion', platform: 'PartnerStack', commission: '50% 1st Year', url: 'https://www.notion.so/affiliates', icon: 'fa-book', color: 'text-neutral-200' },
+            { id: 'elevenlabs', name: 'ElevenLabs', platform: 'Impact', commission: 'High Variable', url: 'https://elevenlabs.io/affiliate', icon: 'fa-microphone-lines', color: 'text-indigo-400' },
+            { id: 'fiverr', name: 'Fiverr', platform: 'In-House', commission: '10-50%', url: 'https://affiliates.fiverr.com/', icon: 'fa-briefcase', color: 'text-green-500' },
+            { id: 'heygen', name: 'HeyGen', platform: 'PartnerStack', commission: '20% Recurring', url: 'https://heygen.partnerstack.com/application', icon: 'fa-user-tie', color: 'text-indigo-400' },
+            { id: 'invideo', name: 'InVideo', platform: 'Impact', commission: '25% Recurring', url: 'https://invideo.io/affiliate', icon: 'fa-clapperboard', color: 'text-cyan-400' },
+            { id: 'lovable', name: 'Lovable', platform: 'Manual', commission: '20% Recurring', url: '#', icon: 'fa-heart', color: 'text-pink-400' },
+            { id: 'cursor', name: 'Cursor', platform: 'Friend', commission: 'Credits', url: '#', icon: 'fa-terminal', color: 'text-slate-200' },
+            { id: 'bolt', name: 'Bolt.new', platform: 'Manual', commission: 'Unknown', url: '#', icon: 'fa-bolt', color: 'text-yellow-400' }
         ];
 
-        document.getElementById('progCount').innerText = programs.length;
-        const grid = document.getElementById('gridArea');
-        programs.forEach(p => {
-            const card = document.createElement('div');
-            card.className = 'glass-panel p-5 rounded-xl border border-white/5 hover:border-indigo-500/30 transition-all group';
-            card.innerHTML = `
-                <div class="flex justify-between items-start mb-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center border border-white/5 group-hover:bg-slate-700 transition-colors">
-                            <i class="fa-solid ${p.icon} ${p.color} text-lg"></i>
+        // LOAD STATUS
+        const savedStatus = JSON.parse(localStorage.getItem('progStatus') || '{}');
+
+        function renderPrograms() {
+            const grid = document.getElementById('programGrid');
+            grid.innerHTML = '';
+            let stats = { approved: 0, applied: 0, pending: 0 };
+
+            programs.forEach(p => {
+                const status = savedStatus[p.id] || 'pending';
+                stats[status]++;
+
+                // Determine Badge Style
+                let badgeClass = 'status-pending';
+                if (status === 'applied') badgeClass = 'status-applied';
+                if (status === 'approved') badgeClass = 'status-approved';
+
+                const card = document.createElement('div');
+                card.className = 'glass-card p-5 rounded-xl flex flex-col h-full';
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-dark-800 border border-dark-700 flex items-center justify-center">
+                                <i class="fa-solid ${p.icon} ${p.color} text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-sm">${p.name}</h3>
+                                <p class="text-slate-500 text-[10px]">${p.platform}</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="text-white font-bold">${p.name}</h3>
-                            <p class="text-slate-500 text-xs">${p.platform}</p>
-                        </div>
+                        <span class="status-badge ${badgeClass}" onclick="cycleStatus('${p.id}')">${status}</span>
                     </div>
-                    ${p.popular ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">HOT</span>' : ''}
-                </div>
-                <div class="bg-slate-900/50 rounded-lg p-3 mb-4">
-                    <p class="text-xs text-slate-500 uppercase font-bold mb-1">Commission</p>
-                    <p class="text-green-400 font-mono font-medium">${p.commission}</p>
-                </div>
-                <a href="${p.url}" target="_blank" class="block w-full text-center py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white text-sm font-bold transition-colors">Apply Now <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-xs opacity-50"></i></a>
-            `;
-            grid.appendChild(card);
-        });
+                    <div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+                        <div>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold">Payout</p>
+                            <p class="text-slate-200 font-bold text-sm">${p.commission}</p>
+                        </div>
+                        <a href="${p.url}" target="_blank" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white transition-colors"><i class="fa-solid fa-arrow-right text-xs"></i></a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
 
-        // --- SOCIAL LOGIC ---
+            // Update Stats
+            document.getElementById('stat-approved').innerText = stats.approved;
+            document.getElementById('stat-applied').innerText = stats.applied;
+            document.getElementById('stat-pending').innerText = stats.pending;
+        }
+
+        function cycleStatus(id) {
+            const current = savedStatus[id] || 'pending';
+            const next = { 'pending': 'applied', 'applied': 'approved', 'approved': 'pending' };
+            savedStatus[id] = next[current];
+            localStorage.setItem('progStatus', JSON.stringify(savedStatus));
+            renderPrograms();
+        }
+
+        function filterPrograms() { /* Text filter could go here */ }
+
+        renderPrograms();
+
+        // SOCIAL JS
         let selectedTool = 'Lovable';
-        let selectedVibe = 'viral';
-
         function selectTool(tool, el) {
             selectedTool = tool;
-            document.querySelectorAll('.tool-btn').forEach(b => {
-                b.classList.remove('active', 'bg-indigo-600/20', 'border-indigo-500/50', 'text-white');
-                b.classList.add('bg-slate-800/50', 'border-slate-700/50', 'text-slate-400');
+            document.querySelectorAll('.social-tool').forEach(b => {
+                b.className = 'social-tool bg-dark-800 border border-dark-700 text-slate-400 p-3 rounded-lg text-sm text-left hover:bg-dark-700 transition-all';
             });
-            el.classList.add('active', 'bg-indigo-600/20', 'border-indigo-500/50', 'text-white');
-            el.classList.remove('bg-slate-800/50', 'border-slate-700/50', 'text-slate-400');
+            el.className = 'social-tool active bg-brand-500/20 border border-brand-500/50 text-white p-3 rounded-lg text-sm text-left transition-all';
         }
-
-        function setVibe(vibe) {
-            selectedVibe = vibe;
-            const vt = document.getElementById('btn-viral');
-            const pt = document.getElementById('btn-pro');
-
-            if (vibe === 'viral') {
-                vt.className = "flex-1 py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold shadow-lg transition-all";
-                pt.className = "flex-1 py-2 rounded-lg text-slate-400 hover:text-white text-xs font-bold transition-all";
-            } else {
-                pt.className = "flex-1 py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold shadow-lg transition-all";
-                vt.className = "flex-1 py-2 rounded-lg text-slate-400 hover:text-white text-xs font-bold transition-all";
-            }
-        }
-
         function generateTweet() {
-            const templates = {
-                'Lovable': {
-                    'viral': "Coding is obsolete. 💀\n\nI just described my dream app to Lovable AI and it built the ENTIRE thing in 45 seconds.\n\nBackend, DB, Auth... done.\n\nTry it now -> https://one-ai-stop.vercel.app/tools/lovable \n\n#NoCode #AIRevolution",
-                    'pro': "The velocity of development with Lovable.dev is unmatched. We cut our MVP build time by 90% by utilizing their natural language to code pipeline.\n\nA must-try for lean startups.\n\nLink: https://one-ai-stop.vercel.app/tools/lovable"
-                },
-                'Cursor': {
-                    'viral': "I fired my junior dev. (Joking... kind of) 😅\n\nCursor AI just wrote 500 lines of complex React code in 10 seconds. It predicts my thoughts.\n\nDownload current best editor: https://one-ai-stop.vercel.app/tools/cursor\n\n#DevLife #AI",
-                    'pro': "Switched our team to Cursor solely for the 'Composer' feature. The ability to refactor multiple files simultaneously via prompt is a massive productivity unlock.\n\nGet it here: https://one-ai-stop.vercel.app/tools/cursor"
-                },
-                'Descript': {
-                    'viral': "STOP cutting silence manually! 🛑\n\nDescript removes 'umms' and 'ahhs' automatically. It edits video like a Google Doc.\n\nGame changer for YouTubers.\n\nLink: https://one-ai-stop.vercel.app/tools/descript",
-                    'pro': "Streamlining post-production. Descript's text-based editing approach has reduced our rough-cut time by ~4 hours per video asset.\n\nHighly efficient."
-                },
-                'ElevenLabs': {
-                    'viral': "This is NOT my voice. 🤖\n\nI just cloned myself using ElevenLabs and it sounds 99.9% real. Podcasting is about to change forever.\n\nTry it free: https://one-ai-stop.vercel.app/tools/elevenlabs",
-                    'pro': "Voice synthesis has reached production quality. ElevenLabs Turbo v2 model offers low latency and high emotion range perfect for automated video narration."
-                }
+            // Keep existing Tweet Logic or Expand
+            const msgs = {
+                'Lovable': "Describe it. Build it. 🚀\n\nLovable AI turns prompts into full-stack web apps in seconds.\n\nTry it: https://one-ai-stop.vercel.app #NoCode",
+                'Cursor': "VS Code killer? 🧐\n\nCursor AI wrote 80% of my code today. Productivity is through the roof.\n\nGet it: https://one-ai-stop.vercel.app #Dev",
+                'Descript': "Editing video by deleting text is magic. ✨\n\nDescript is a must-have for creators.\n\nLink: https://one-ai-stop.vercel.app",
+                'ElevenLabs': "This voice is AI. �\n\nElevenLabs is indistinguishable from human speech.\n\nClone your voice: https://one-ai-stop.vercel.app"
             };
-            const t = templates[selectedTool]?.[selectedVibe] || "Check out this amazing AI tool on OneAIStop!";
-            document.getElementById('tweetOutput').value = t;
+            document.getElementById('tweetOutput').value = msgs[selectedTool] || "AI Magic!";
         }
-
         function copyTweet() {
             const el = document.getElementById('tweetOutput');
-            el.select();
-            document.execCommand('copy');
-            alert("Tweet copied to clipboard! 🐦");
+            el.select(); document.execCommand('copy');
+            alert("Copied!");
         }
+
     </script>
 </body>
 
