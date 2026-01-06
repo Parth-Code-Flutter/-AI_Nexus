@@ -83,6 +83,133 @@
         </div>
     </nav>
 
+    <!-- News Ticker -->
+    <div class="bg-brand-600/10 border-b border-brand-500/20 overflow-hidden py-2 relative">
+        <div class="whitespace-nowrap animate-marquee flex gap-8 items-center text-sm font-medium text-brand-300">
+            <span><span class="text-white bg-brand-600 px-2 py-0.5 rounded text-xs mr-2">BREAKING</span>OpenAI releases
+                Sora public beta</span>
+            <span><i class="fa-solid fa-bolt text-yellow-400 mx-2"></i></span>
+            <span>Midjourney v7 adds text rendering</span>
+            <span><i class="fa-solid fa-bolt text-yellow-400 mx-2"></i></span>
+            <span>Google Gemini Ultra 1.5 outperforms GPT-4</span>
+            <span><i class="fa-solid fa-bolt text-yellow-400 mx-2"></i></span>
+            <span>New Video Tools added to directory: Opus, InVideo, HeyGen</span>
+        </div>
+    </div>
+
+    <style>
+        .animate-marquee {
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .bento-card {
+            backdrop-filter: blur(12px);
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+        }
+
+        .glow-hover:hover {
+            box-shadow: 0 0 25px rgba(14, 165, 233, 0.15);
+            border-color: rgba(14, 165, 233, 0.4);
+        }
+    </style>
+
+    <!-- Hero Bento Grid -->
+    <section class="max-w-7xl mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+
+            <!-- Main Hero (Spans 2 cols) -->
+            <div class="md:col-span-2 relative group overflow-hidden rounded-3xl border border-white/10 shadow-2xl cursor-pointer"
+                onclick="window.location='article.html?id=best-ai-video-tools-2026'">
+                <div class="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent z-10"></div>
+                <!-- Background Image Placeholder (Gradient) -->
+                <div
+                    class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2832&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105">
+                </div>
+
+                <div class="absolute bottom-0 left-0 p-8 z-20 max-w-2xl">
+                    <span
+                        class="inline-block bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full mb-4 shadow-lg shadow-brand-500/20">FEATURED</span>
+                    <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight drop-shadow-lg">The 5 Best
+                        AI Video Tools for 2026</h1>
+                    <p class="text-slate-200 line-clamp-2 md:text-lg mb-6 opacity-90">Stop editing manually. We tested
+                        20+ tools to find the top 5 for faceless channels.</p>
+                    <div class="flex items-center gap-3 text-sm font-medium text-white/80">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=random"
+                            class="w-8 h-8 rounded-full border border-white/20">
+                        <span>By Editor</span> • <span>5 min read</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Card (Trending News) -->
+            <div
+                class="md:col-span-1 bento-card border border-white/10 rounded-3xl p-6 flex flex-col justify-between glow-hover transition-all">
+                <div>
+                    <div class="flex items-center gap-2 mb-6">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <h3 class="text-sm font-bold text-slate-400 tracking-wider">DAILY BRIEF</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <!-- Mini News Items -->
+                        <a href="#" class="block group/item">
+                            <h4 class="text-white font-bold group-hover/item:text-brand-400 transition-colors">OpenAI
+                                releases new 'Memory' feature</h4>
+                            <p class="text-xs text-slate-500 mt-1">ChatGPT can now remember your preferences.</p>
+                        </a>
+                        <a href="#" class="block group/item">
+                            <h4 class="text-white font-bold group-hover/item:text-brand-400 transition-colors">Claude
+                                3.5 Opus is now faster</h4>
+                            <p class="text-xs text-slate-500 mt-1">Anthropic updates their flagship model.</p>
+                        </a>
+                    </div>
+                </div>
+                <button
+                    class="w-full mt-4 bg-white/5 hover:bg-white/10 text-slate-300 text-sm font-bold py-3 rounded-xl transition-colors border border-white/5">
+                    View Archive
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Category Filter (Glass Pill) -->
+    <div class="sticky top-20 z-40 py-4 mb-4 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 flex justify-center">
+            <div
+                class="inline-flex bg-slate-900/80 backdrop-blur-md border border-white/10 p-1.5 rounded-2xl shadow-xl gap-1">
+                <button onclick="filterPosts('all')"
+                    class="filter-btn px-5 py-2 rounded-xl bg-brand-600 text-white text-sm font-bold shadow-lg shadow-brand-500/20 transition-all"
+                    data-cat="all">All</button>
+                <button onclick="filterPosts('News')"
+                    class="filter-btn px-5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 text-sm font-medium transition-all"
+                    data-cat="News">News</button>
+                <button onclick="filterPosts('Tutorials')"
+                    class="filter-btn px-5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 text-sm font-medium transition-all"
+                    data-cat="Tutorials">Tutorials</button>
+                <button onclick="filterPosts('Reviews')"
+                    class="filter-btn px-5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 text-sm font-medium transition-all"
+                    data-cat="Reviews">Reviews</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic Grid -->
+    <section class="max-w-7xl mx-auto px-4 py-8">
+        <div id="blogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Injected by JS -->
+        </div>
+    </section>
+
     </section>
 
     <!-- Newsletter CTA -->
