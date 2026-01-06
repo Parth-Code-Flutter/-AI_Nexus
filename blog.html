@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneAIStop Blog | Daily AI News, Tutorials & Rankings</title>
+    <meta name="description"
+        content="Stay ahead of the curve with daily AI news, in-depth tool reviews, and step-by-step tutorials for creators and founders.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                        },
+                        dark: {
+                            bg: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-dark-bg text-slate-300 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Header -->
+    <nav class="sticky top-0 z-50 border-b border-white/5 bg-dark-bg/80 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform">
+                        1
+                    </div>
+                    <span class="text-xl font-bold text-white tracking-tight">OneAIStop <span
+                            class="text-brand-500 text-sm font-medium ml-1">Daily</span></span>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html"
+                        class="text-slate-400 hover:text-white transition-colors text-sm font-medium">Tools
+                        Directory</a>
+                    <a href="#" class="text-white font-medium text-sm border-b-2 border-brand-500 pb-0.5">Latest</a>
+                    <a href="#"
+                        class="text-slate-400 hover:text-white transition-colors text-sm font-medium">Tutorials</a>
+                    <a href="#"
+                        class="text-slate-400 hover:text-white transition-colors text-sm font-medium">Reviews</a>
+                </div>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScXXgCkS5coOo2xQwOBanMCim7ulRTEb0wpTHghUZI65TSyGQ/viewform"
+                    target="_blank"
+                    class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2 rounded-full text-xs font-bold transition-all shadow-lg hover:shadow-brand-500/25">
+                    Subscribe Free
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Featured Post) -->
+    <section class="relative py-12 px-4 border-b border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1 animate-fade-in">
+                    <span
+                        class="inline-block bg-orange-500/10 text-orange-400 border border-orange-500/20 px-3 py-1 rounded-full text-xs font-bold mb-4 uppercase tracking-wider">
+                        <i class="fa-solid fa-fire mr-1"></i> Featured Guide
+                    </span>
+                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                        The 5 Best AI Video Tools for 2026 (Ranked & Reviewed)
+                    </h1>
+                    <p class="text-lg text-slate-400 mb-8 leading-relaxed">
+                        Stop editing manually. We tested 20+ tools to find the top 5 for faceless channels, automated
+                        editing, and realistic avatars.
+                    </p>
+                    <a href="blog_best_video_tools.html"
+                        class="inline-flex items-center bg-white text-slate-900 px-8 py-3 rounded-xl font-bold hover:bg-brand-50 hover:text-brand-600 transition-all group">
+                        Read Full Ranking <i
+                            class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+                <div class="order-1 lg:order-2 animate-fade-in" style="animation-delay: 0.1s;">
+                    <a href="blog_best_video_tools.html"
+                        class="block relative group overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-tr from-brand-600/20 to-purple-600/20 group-hover:opacity-0 transition-opacity z-10">
+                        </div>
+                        <div class="aspect-video bg-slate-900 relative">
+                            <!-- Placeholder for real image, using gradient for now -->
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
+                                <i
+                                    class="fa-solid fa-video text-6xl text-slate-700 group-hover:text-brand-500 transition-colors duration-500"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Articles Grid -->
+    <section class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between mb-12">
+                <h2 class="text-3xl font-bold text-white">Latest Updates</h2>
+                <div class="hidden sm:flex items-center gap-2">
+                    <button onclick="filterPosts('all')"
+                        class="filter-btn px-4 py-2 rounded-lg bg-white/10 text-white text-sm font-medium transition-colors"
+                        data-cat="all">All</button>
+                    <button onclick="filterPosts('News')"
+                        class="filter-btn px-4 py-2 rounded-lg hover:bg-white/5 text-slate-400 text-sm font-medium transition-colors"
+                        data-cat="News">News</button>
+                    <button onclick="filterPosts('Tutorials')"
+                        class="filter-btn px-4 py-2 rounded-lg hover:bg-white/5 text-slate-400 text-sm font-medium transition-colors"
+                        data-cat="Tutorials">Tutorials</button>
+                    <button onclick="filterPosts('Reviews')"
+                        class="filter-btn px-4 py-2 rounded-lg hover:bg-white/5 text-slate-400 text-sm font-medium transition-colors"
+                        data-cat="Reviews">Reviews</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Grid -->
+            <div id="blogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <div class="relative bg-gradient-to-r from-brand-900 to-slate-900 border-t border-white/10 py-20 text-center">
+        <div class="max-w-2xl mx-auto px-6">
+            <i class="fa-regular fa-paper-plane text-5xl text-brand-400 mb-6 block"></i>
+            <h2 class="text-3xl font-bold text-white mb-4">Never miss a tool drop.</h2>
+            <p class="text-slate-300 mb-8">Get the "AI Daily" digest. We filter the noise so you don't have to.</p>
+
+            <form
+                action="https://docs.google.com/forms/d/e/1FAIpQLScXXgCkS5coOo2xQwOBanMCim7ulRTEb0wpTHghUZI65TSyGQ/viewform"
+                target="_blank" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input type="email" placeholder="Enter your email" disabled
+                    class="flex-1 bg-white/10 text-white px-6 py-3 rounded-lg border border-white/10 focus:outline-none focus:border-brand-500 cursor-not-allowed"
+                    value="Redirecting...">
+                <button
+                    class="bg-brand-600 hover:bg-brand-500 text-white font-bold px-8 py-3 rounded-lg transition-all whitespace-nowrap shadow-lg shadow-brand-500/20">
+                    Join Free
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark-bg border-t border-dark-border py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-slate-500 text-sm">&copy; 2026 OneAIStop. Built for the future.</p>
+        </div>
+    </footer>
+
+    <!-- Load Data & Logic -->
+    <script src="posts.js"></script>
+    <script>
+        const blogGrid = document.getElementById('blogGrid');
+
+        function renderPosts(category) {
+            blogGrid.innerHTML = '';
+
+            const postsToRender = category === 'all'
+                ? blogPosts
+                : blogPosts.filter(p => p.category === category);
+
+            postsToRender.forEach(post => {
+                const card = document.createElement('article');
+                card.className = "bg-dark-card border border-dark-border rounded-2xl overflow-hidden hover:border-brand-500/30 hover:shadow-2xl hover:shadow-brand-500/5 transition-all group cursor-pointer h-full flex flex-col";
+                card.onclick = () => window.location = `article.html?id=${post.id}`;
+
+                card.innerHTML = `
+                    <div class="h-48 bg-slate-800 relative overflow-hidden shrink-0">
+                        <div class="absolute top-4 left-4 z-10">
+                            <span class="bg-brand-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-lg uppercase">${post.category}</span>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-900/50 to-slate-900 flex items-center justify-center">
+                            <i class="fa-solid ${post.imageIcon} text-4xl text-white/20 group-hover:scale-110 transition-transform duration-500 ${post.color || ''}"></i>
+                        </div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <div class="flex items-center gap-2 text-xs text-slate-500 mb-3">
+                            <span><i class="fa-regular fa-calendar mr-1"></i> ${post.date}</span>
+                            <span>•</span>
+                            <span>${post.readTime}</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-400 transition-colors">${post.title}</h3>
+                        <p class="text-slate-400 text-sm line-clamp-2 mb-4">${post.description}</p>
+                        <div class="mt-auto pt-4 border-t border-white/5 flex items-center text-brand-400 text-sm font-bold group-hover:translate-x-1 transition-transform">
+                            Read Now <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                `;
+
+                blogGrid.appendChild(card);
+            });
+        }
+
+        function filterPosts(cat) {
+            // Update Buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                const isSelected = btn.dataset.cat === cat || (cat === 'all' && btn.innerText === 'All' && !btn.dataset.cat);
+
+                if (btn.innerText === (cat === 'all' ? 'All' : cat)) {
+                    btn.className = "filter-btn px-4 py-2 rounded-lg bg-white/10 text-white text-sm font-medium transition-colors";
+                } else {
+                    btn.className = "filter-btn px-4 py-2 rounded-lg hover:bg-white/5 text-slate-400 text-sm font-medium transition-colors";
+                }
+            });
+            renderPosts(cat);
+        }
+
+        // Init
+        renderPosts('all');
+    </script>
+</body>
+
+</html>
