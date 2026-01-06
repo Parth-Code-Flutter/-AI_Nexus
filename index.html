@@ -228,6 +228,12 @@
                             class="whitespace-nowrap">Social</span>
                     </button>
 
+                    <button onclick="filterTools('coding')"
+                        class="category-btn group flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300">
+                        <i class="fa-solid fa-code group-hover:text-cyan-400 transition-colors"></i> <span
+                            class="whitespace-nowrap">Coding</span>
+                    </button>
+
                     <button onclick="filterTools('productivity')"
                         class="category-btn group flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300">
                         <i class="fa-solid fa-bolt group-hover:text-yellow-400 transition-colors"></i> <span
@@ -578,6 +584,44 @@
                 tags: ["SFX", "Sound Design", "Meta"]
             },
 
+            // Coding Tools
+            {
+                name: "Cursor",
+                category: "coding",
+                description: "The best AI code editor. It's a fork of VS Code with GPT-4 built right into the terminal and editor.",
+                url: "https://cursor.sh",
+                icon: "fa-terminal",
+                color: "text-slate-200",
+                tags: ["Editor", "Free Plan", "VS Code"]
+            },
+            {
+                name: "Lovable.dev",
+                category: "coding",
+                description: "Describe a website, and it builds it. The most impressive 'Text-to-App' tool available right now.",
+                url: "https://lovable.dev",
+                icon: "fa-heart",
+                color: "text-pink-400",
+                tags: ["Websites", "No-Code", "Fast"]
+            },
+            {
+                name: "Bolt.new",
+                category: "coding",
+                description: "Run full-stack apps in the browser. Instant environment setup for React, Node, and more.",
+                url: "https://bolt.new",
+                icon: "fa-bolt",
+                color: "text-yellow-400",
+                tags: ["Full Stack", "Browser", "Instant"]
+            },
+            {
+                name: "Replit Agent",
+                category: "coding",
+                description: "An autonomous agent that can plan, write, and deploy code for you. The future of coding.",
+                url: "https://replit.com",
+                icon: "fa-code-branch",
+                color: "text-orange-500",
+                tags: ["Agent", "Deployment", "Cloud"]
+            },
+
             // Script/Text
             {
                 name: "Claude 3.5 Sonnet",
@@ -847,7 +891,8 @@
             'voice': ['Cloning', 'TTS', 'Music', 'Dubbing'],
             'script': ['Copywriting', 'SEO', 'Coding', 'Research'],
             'social': ['Instagram', 'Twitter', 'LinkedIn', 'Analytics'],
-            'productivity': ['Slides', 'Notetaking', 'Automation']
+            'productivity': ['Slides', 'Notetaking', 'Automation'],
+            'coding': ['Editors', 'Agents', 'Websites', 'Python']
         };
 
         function filterTools(category) {
