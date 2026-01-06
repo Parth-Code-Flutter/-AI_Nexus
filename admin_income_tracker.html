@@ -169,6 +169,14 @@
                     </div>
                 </div>
 
+                <!-- Tab Navigation -->
+                <div class="hidden md:flex bg-slate-900 border border-slate-700 rounded-lg p-1 mx-4">
+                    <button onclick="switchTab('income')" id="tab-btn-income"
+                        class="px-4 py-1.5 rounded-md text-sm font-medium bg-brand-600 text-white shadow-lg shadow-brand-500/10 transition-all">Income</button>
+                    <button onclick="switchTab('social')" id="tab-btn-social"
+                        class="px-4 py-1.5 rounded-md text-sm font-medium text-slate-400 hover:text-white transition-all">Social</button>
+                </div>
+
                 <div class="flex items-center gap-3">
                     <!-- Social Traffic Sources -->
                     <div class="hidden md:flex items-center gap-2 mr-2 border-r border-dark-700 pr-4">
@@ -212,90 +220,234 @@
 
         <!-- Main Content -->
         <main class="flex-1 max-w-7xl mx-auto px-6 py-10 w-full">
+            <div id="income-tab" class="tab-content animate-fade-in">
 
-            <!-- Header & Search -->
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-                <div>
-                    <h2 class="text-3xl font-bold text-white mb-2 tracking-tight">Revenue Channels</h2>
-                    <p class="text-neutral-500 text-sm">Manage your affiliate partnerships and application status.</p>
-                </div>
-
-                <div class="relative w-full md:w-96 group">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <i class="fa-solid fa-search text-neutral-500 text-sm"></i>
+                <!-- Header & Search -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                    <div>
+                        <h2 class="text-3xl font-bold text-white mb-2 tracking-tight">Revenue Channels</h2>
+                        <p class="text-neutral-500 text-sm">Manage your affiliate partnerships and application status.
+                        </p>
                     </div>
-                    <input type="text" id="searchInput" placeholder="Search programs (Ctrl+K)"
-                        class="w-full bg-dark-800 border border-dark-700 text-white text-sm rounded-lg block pl-10 p-2.5 search-glow outline-none transition-all placeholder-neutral-600"
-                        autocomplete="off">
-                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <kbd
-                            class="inline-flex items-center border border-dark-600 rounded px-2 text-xs font-sans font-medium text-neutral-500">⌘K</kbd>
+
+                    <div class="relative w-full md:w-96 group">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-search text-neutral-500 text-sm"></i>
+                        </div>
+                        <input type="text" id="searchInput" placeholder="Search programs (Ctrl+K)"
+                            class="w-full bg-dark-800 border border-dark-700 text-white text-sm rounded-lg block pl-10 p-2.5 search-glow outline-none transition-all placeholder-neutral-600"
+                            autocomplete="off">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <kbd
+                                class="inline-flex items-center border border-dark-600 rounded px-2 text-xs font-sans font-medium text-neutral-500">⌘K</kbd>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                    <div class="glass-panel p-4 rounded-xl border-l-4 border-l-brand-500">
+                        <p class="text-neutral-500 text-xs font-medium uppercase tracking-wider mb-1">Potential CPA</p>
+                        <p class="text-2xl font-bold text-white">₹1,600+</p>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl border-l-4 border-l-green-500">
+                        <p class="text-neutral-500 text-xs font-medium uppercase tracking-wider mb-1">Rev Share</p>
+                        <p class="text-2xl font-bold text-white">Up to 45%</p>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl border-l-4 border-l-orange-500">
+                        <p class="text-neutral-500 text-xs font-medium uppercase tracking-wider mb-1">Programs</p>
+                        <p class="text-2xl font-bold text-white" id="programCount">12</p>
+                    </div>
+                </div>
+
+                <!-- Grid Layout -->
+                <div id="gridArea" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <!-- Cards Injected Here -->
+                </div>
+
+            </div>
+    </div>
+
+    <!-- SOCIAL TAB -->
+    <div id="social-tab" class="tab-content hidden animate-fade-in">
+        <h2 class="text-2xl font-bold text-white mb-6">Tweet Generator</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <!-- Generator Controls -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-700">
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-400 mb-2">Select Tool</label>
+                        <select id="toolSelect"
+                            class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-brand-500 outline-none">
+                            <option value="Descript">Descript</option>
+                            <option value="ElevenLabs">ElevenLabs</option>
+                            <option value="Lovable">Lovable</option>
+                            <option value="Cursor">Cursor</option>
+                            <option value="Bolt">Bolt.new</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-400 mb-2">Vibe</label>
+                        <div class="flex gap-4">
+                            <button onclick="setVibe('viral')"
+                                class="vibe-btn flex-1 py-2 rounded-lg bg-brand-600 text-white text-sm font-bold shadow-lg shadow-brand-500/20">🔥
+                                Viral</button>
+                            <button onclick="setVibe('pro')"
+                                class="vibe-btn flex-1 py-2 rounded-lg bg-slate-800 text-slate-400 text-sm font-medium">💼
+                                Pro</button>
+                        </div>
+                    </div>
+                    <button onclick="generateTweet()"
+                        class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-brand-500/20 transition-all transform hover:-translate-y-1">
+                        <i class="fa-brands fa-twitter mr-2"></i> Generate Tweet
+                    </button>
+                </div>
             </div>
 
-            <!-- Quick Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-                <div class="glass-panel p-4 rounded-xl border-l-4 border-l-brand-500">
-                    <p class="text-neutral-500 text-xs font-medium uppercase tracking-wider mb-1">Potential CPA</p>
-                    <p class="text-2xl font-bold text-white">₹1,600+</p>
+            <!-- Output Preview -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-700 relative">
+                <div class="flex items-center gap-2 mb-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-white font-bold text-xs">
+                        OA</div>
+                    <div>
+                        <p class="text-white font-bold text-sm">OneAIStop <span
+                                class="text-slate-500 font-normal">@OneAIStop</span></p>
+                    </div>
                 </div>
-                <div class="glass-panel p-4 rounded-xl border-l-4 border-l-green-500">
-                    <p class="text-neutral-500 text-xs font-medium uppercase tracking-wider mb-1">Rev Share</p>
-                    <p class="text-2xl font-bold text-white">Up to 45%</p>
-                </div>
-                <div class="glass-panel p-4 rounded-xl border-l-4 border-l-orange-500">
-                    <p class="text-neutral-500 text-xs font-medium uppercase tracking-wider mb-1">Programs</p>
-                    <p class="text-2xl font-bold text-white" id="programCount">12</p>
+                <textarea id="tweetOutput"
+                    class="w-full h-32 bg-transparent text-lg text-white font-medium resize-none focus:outline-none"
+                    placeholder="Tweet will appear here..."></textarea>
+
+                <div class="border-t border-slate-800 pt-4 mt-4 flex justify-between items-center text-slate-500">
+                    <div class="flex gap-4 text-brand-500">
+                        <i class="fa-regular fa-image"></i>
+                        <i class="fa-solid fa-gift"></i>
+                        <i class="fa-solid fa-chart-simple"></i>
+                    </div>
+                    <button onclick="copyTweet()"
+                        class="bg-white/10 hover:bg-white/20 text-white px-4 py-1.5 rounded-full text-sm font-bold transition-colors">Copy</button>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- Grid Layout -->
-            <div id="gridArea" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <!-- Cards Injected Here -->
-            </div>
+    </main>
 
-        </main>
+    <script>
+        const programs = [
+            { id: 'descript', name: 'Descript', platform: 'PartnerStack', commission: '15% Recurring', url: 'https://app.partnerstack.com/partners/descript/apply', icon: 'fa-headphones', color: 'text-blue-400', popular: true },
+            { id: 'copyai', name: 'Copy.ai', platform: 'In-House', commission: '45% 1st Year', url: 'https://affiliates.copy.ai/apply', icon: 'fa-pen-fancy', color: 'text-emerald-400', popular: true },
+            { id: 'writesonic', name: 'Writesonic', platform: 'In-House', commission: '30% Lifetime', url: 'https://writesonic.com/affiliate-program', icon: 'fa-pencil', color: 'text-orange-400', popular: false },
+            { id: 'grammarly', name: 'Grammarly', platform: 'PartnerStack', commission: '₹1,600 CPA', url: 'https://www.grammarly.com/affiliates', icon: 'fa-spell-check', color: 'text-green-400', popular: true },
+            { id: 'synthesia', name: 'Synthesia', platform: 'PartnerStack', commission: '20% Recurring', url: 'https://www.synthesia.io/affiliate', icon: 'fa-user-tie', color: 'text-indigo-400', popular: false },
+            { id: 'notion', name: 'Notion', platform: 'PartnerStack', commission: '50% 1st Year', url: 'https://www.notion.so/affiliates', icon: 'fa-book', color: 'text-neutral-200', popular: true },
+            { id: 'elevenlabs', name: 'ElevenLabs', platform: 'Impact', commission: 'High Variable', url: 'https://elevenlabs.io/affiliate', icon: 'fa-microphone-lines', color: 'text-indigo-400', popular: true },
+            { id: 'fiverr', name: 'Fiverr', platform: 'In-House', commission: '10-50%', url: 'https://affiliates.fiverr.com/', icon: 'fa-briefcase', color: 'text-green-500', popular: false },
+            { id: 'heygen', name: 'HeyGen', platform: 'PartnerStack', commission: '20% Recurring', url: 'https://heygen.partnerstack.com/application', icon: 'fa-user-tie', color: 'text-indigo-400', popular: true },
+            { id: 'invideo', name: 'InVideo', platform: 'Impact', commission: '25-50% Sale', url: 'https://invideo.io/affiliate/', icon: 'fa-clapperboard', color: 'text-cyan-400', popular: false },
+            { id: 'canva', name: 'Canva', platform: 'Impact', commission: 'Bounties', url: 'https://www.canva.com/affiliates/', icon: 'fa-pen-nib', color: 'text-blue-500', popular: false },
+            { id: 'murf', name: 'Murf.ai', platform: 'Impact', commission: '20% Recurring', url: 'https://murf.ai/affiliate', icon: 'fa-sliders', color: 'text-lime-400', popular: false }
+        ];
 
-        <script>
-            const programs = [
-                { id: 'descript', name: 'Descript', platform: 'PartnerStack', commission: '15% Recurring', url: 'https://app.partnerstack.com/partners/descript/apply', icon: 'fa-headphones', color: 'text-blue-400', popular: true },
-                { id: 'copyai', name: 'Copy.ai', platform: 'In-House', commission: '45% 1st Year', url: 'https://affiliates.copy.ai/apply', icon: 'fa-pen-fancy', color: 'text-emerald-400', popular: true },
-                { id: 'writesonic', name: 'Writesonic', platform: 'In-House', commission: '30% Lifetime', url: 'https://writesonic.com/affiliate-program', icon: 'fa-pencil', color: 'text-orange-400', popular: false },
-                { id: 'grammarly', name: 'Grammarly', platform: 'PartnerStack', commission: '₹1,600 CPA', url: 'https://www.grammarly.com/affiliates', icon: 'fa-spell-check', color: 'text-green-400', popular: true },
-                { id: 'synthesia', name: 'Synthesia', platform: 'PartnerStack', commission: '20% Recurring', url: 'https://www.synthesia.io/affiliate', icon: 'fa-user-tie', color: 'text-indigo-400', popular: false },
-                { id: 'notion', name: 'Notion', platform: 'PartnerStack', commission: '50% 1st Year', url: 'https://www.notion.so/affiliates', icon: 'fa-book', color: 'text-neutral-200', popular: true },
-                { id: 'elevenlabs', name: 'ElevenLabs', platform: 'Impact', commission: 'High Variable', url: 'https://elevenlabs.io/affiliate', icon: 'fa-microphone-lines', color: 'text-indigo-400', popular: true },
-                { id: 'fiverr', name: 'Fiverr', platform: 'In-House', commission: '10-50%', url: 'https://affiliates.fiverr.com/', icon: 'fa-briefcase', color: 'text-green-500', popular: false },
-                { id: 'heygen', name: 'HeyGen', platform: 'PartnerStack', commission: '20% Recurring', url: 'https://heygen.partnerstack.com/application', icon: 'fa-user-tie', color: 'text-indigo-400', popular: true },
-                { id: 'invideo', name: 'InVideo', platform: 'Impact', commission: '25-50% Sale', url: 'https://invideo.io/affiliate/', icon: 'fa-clapperboard', color: 'text-cyan-400', popular: false },
-                { id: 'canva', name: 'Canva', platform: 'Impact', commission: 'Bounties', url: 'https://www.canva.com/affiliates/', icon: 'fa-pen-nib', color: 'text-blue-500', popular: false },
-                { id: 'murf', name: 'Murf.ai', platform: 'Impact', commission: '20% Recurring', url: 'https://murf.ai/affiliate', icon: 'fa-sliders', color: 'text-lime-400', popular: false }
-            ];
+        // --- TAB LOGIC ---
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+            document.getElementById(tab + '-tab').classList.remove('hidden');
 
-            document.getElementById('programCount').innerText = programs.length;
+            // Update Button Styles
+            if (tab === 'income') {
+                document.getElementById('tab-btn-income').classList.add('bg-brand-600', 'text-white', 'shadow-lg');
+                document.getElementById('tab-btn-income').classList.remove('text-slate-400');
+                document.getElementById('tab-btn-social').classList.remove('bg-brand-600', 'text-white', 'shadow-lg');
+                document.getElementById('tab-btn-social').classList.add('text-slate-400');
+            } else {
+                document.getElementById('tab-btn-social').classList.add('bg-brand-600', 'text-white', 'shadow-lg');
+                document.getElementById('tab-btn-social').classList.remove('text-slate-400');
+                document.getElementById('tab-btn-income').classList.remove('bg-brand-600', 'text-white', 'shadow-lg');
+                document.getElementById('tab-btn-income').classList.add('text-slate-400');
+            }
+        }
 
-            const gridArea = document.getElementById('gridArea');
-            const searchInput = document.getElementById('searchInput');
+        // --- TWEET GENERATOR LOGIC ---
+        let currentVibe = 'viral';
+        function setVibe(vibe) {
+            currentVibe = vibe;
+            document.querySelectorAll('.vibe-btn').forEach(btn => {
+                if (btn.innerText.toLowerCase().includes(vibe)) {
+                    btn.classList.remove('bg-slate-800', 'text-slate-400');
+                    btn.classList.add('bg-brand-600', 'text-white');
+                } else {
+                    btn.classList.add('bg-slate-800', 'text-slate-400');
+                    btn.classList.remove('bg-brand-600', 'text-white');
+                }
+            });
+        }
 
-            function renderCards(items) {
-                gridArea.innerHTML = '';
+        function generateTweet() {
+            const tool = document.getElementById('toolSelect').value;
+            const templates = {
+                'Descript': {
+                    'viral': "STOP editing video manually. 🛑\n\nI just found an AI that lets you edit video by deleting text.\n\nIt's called Descript and it's 10x faster than Premiere.\n\nTry it here: https://one-ai-stop.vercel.app #AI #CreatorEconomy",
+                    'pro': "Video editing workflow update:\n\nSwitched to Descript for text-based editing. Saves approx 4 hours per project on cutting silence and rough cuts.\n\nHighly recommended for lean teams.\n\nLink: https://one-ai-stop.vercel.app"
+                },
+                'ElevenLabs': {
+                    'viral': "This AI voice is scary good. 🤯\n\nI cloned my voice in 1 minute and it sounds EXACTLY like me.\n\nPodcasters are not ready for this.\n\nTry ElevenLabs: https://one-ai-stop.vercel.app #AI #Tech",
+                    'pro': "The quality of Text-to-Speech has bridged the uncanny valley.\n\nElevenLabs offers the most realistic synthesis I've tested. Great for scalability in content production."
+                },
+                'Lovable': {
+                    'viral': "Coding is dead. 💀\n\nI just described a website to this AI and it BUILT the whole thing in 30 seconds.\n\nCheck out Lovable:\nhttps://one-ai-stop.vercel.app\n\n#NoCode #AI",
+                    'pro': "Rapid prototyping allows for faster iteration cycles. Tools like Lovable.dev follow this principle by converting natural language to web apps instantly."
+                },
+                'Cursor': {
+                    'viral': "VS Code is over. 📉\n\nCursor AI writes my code before I even type it.\n\nIt's like having a senior engineer pair programming with you 24/7.\n\nFree download: https://one-ai-stop.vercel.app #Dev #Coding",
+                    'pro': "Integrated AI into our dev workflow using Cursor. Code shipping velocity increased by 40%. The ability to reference the entire codebase in prompts is a game changer."
+                },
+                'Bolt': {
+                    'viral': "You can now deploy full-stack apps from your browser. ⚡\n\nNo terminal. No npm install. Just prompt and deploy.\n\nBolt.new is actually insane.\n\nTry it: https://one-ai-stop.vercel.app",
+                    'pro': "Cloud development environments are maturing. Bolt.new allows for instant environment provisioning and deployment, reducing devops overhead significantly."
+                }
+            };
 
-                if (items.length === 0) {
-                    gridArea.innerHTML = `
+            let text = templates[tool]?.[currentVibe] || `Check out ${tool} on OneAIStop! #AI`;
+            document.getElementById('tweetOutput').value = text;
+        }
+
+        function copyTweet() {
+            const text = document.getElementById('tweetOutput');
+            text.select();
+            document.execCommand('copy');
+            // Visual Feedback
+            const btn = event.currentTarget;
+            const originalText = btn.innerText;
+            btn.innerText = "Copied!";
+            setTimeout(() => btn.innerText = originalText, 1000);
+        }
+
+        document.getElementById('programCount').innerText = programs.length;
+
+        const gridArea = document.getElementById('gridArea');
+        const searchInput = document.getElementById('searchInput');
+
+        function renderCards(items) {
+            gridArea.innerHTML = '';
+
+            if (items.length === 0) {
+                gridArea.innerHTML = `
                     <div class="col-span-3 text-center py-20 opacity-50">
                         <i class="fa-solid fa-wind text-4xl mb-4 text-neutral-600"></i>
                         <p class="text-neutral-400">No programs found.</p>
                         <a href="https://www.google.com/search?q=${searchInput.value}+affiliate+program" target="_blank" class="text-brand-500 hover:underline text-sm mt-2 block">Search '${searchInput.value}' on Google &rarr;</a>
                     </div>
                  `;
-                    return;
-                }
+                return;
+            }
 
-                items.forEach(item => {
-                    const popularBadge = item.popular ? `<span class="absolute top-3 right-3 bg-brand-500/10 text-brand-400 text-[10px] font-bold px-2 py-0.5 rounded border border-brand-500/20 uppercase tracking-wide">Hot</span>` : '';
+            items.forEach(item => {
+                const popularBadge = item.popular ? `<span class="absolute top-3 right-3 bg-brand-500/10 text-brand-400 text-[10px] font-bold px-2 py-0.5 rounded border border-brand-500/20 uppercase tracking-wide">Hot</span>` : '';
 
-                    gridArea.innerHTML += `
+                gridArea.innerHTML += `
                     <div class="glass-panel rounded-xl p-5 relative hover-card transition-all duration-300 group flex flex-col justify-between h-full">
                         ${popularBadge}
                         <div>
@@ -320,25 +472,25 @@
                         </a>
                     </div>
                 `;
-                });
+            });
+        }
+
+        renderCards(programs);
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = programs.filter(p => p.name.toLowerCase().includes(query));
+            renderCards(filtered);
+        });
+
+        // Keyboard Shortcut
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                searchInput.focus();
             }
-
-            renderCards(programs);
-
-            searchInput.addEventListener('input', (e) => {
-                const query = e.target.value.toLowerCase();
-                const filtered = programs.filter(p => p.name.toLowerCase().includes(query));
-                renderCards(filtered);
-            });
-
-            // Keyboard Shortcut
-            document.addEventListener('keydown', (e) => {
-                if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-                    e.preventDefault();
-                    searchInput.focus();
-                }
-            });
-        </script>
+        });
+    </script>
 </body>
 
 </html>
