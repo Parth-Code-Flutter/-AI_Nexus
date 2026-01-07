@@ -1,5 +1,16 @@
 const blogPosts = [
     {
+        id: "cursor-vs-lovable",
+        title: "Cursor vs Lovable vs Bolt: The Ultimate AI Coding Battle",
+        category: "Reviews",
+        date: "Jan 7, 2026",
+        readTime: "8 min read",
+        imageIcon: "fa-terminal",
+        color: "text-slate-200",
+        description: "We tested the big three to find out which one actually writes production-ready code. The winner might surprise you.",
+        link: "blog_ai_coding_battle.html"
+    },
+    {
         id: "best-ai-video-tools-2026",
         title: "The 5 Best AI Video Tools for 2026 (Ranked)",
         category: "Reviews",
