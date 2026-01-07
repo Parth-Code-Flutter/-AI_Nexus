@@ -207,6 +207,12 @@
                             class="whitespace-nowrap">Image</span>
                     </button>
 
+                    <button onclick="filterTools('design')"
+                        class="category-btn group flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300">
+                        <i class="fa-brands fa-figma group-hover:text-purple-400 transition-colors"></i> <span
+                            class="whitespace-nowrap">Design</span>
+                    </button>
+
                     <button onclick="filterTools('video')"
                         class="category-btn group flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300">
                         <i class="fa-solid fa-video group-hover:text-blue-400 transition-colors"></i> <span
@@ -408,6 +414,62 @@
     <!-- JavaScript Data and Logic -->
     <script>
         const tools = [
+            // Figma / Design
+            {
+                name: "Galileo AI",
+                category: "design",
+                description: "Generates complex UI designs from simple text prompts directly in Figma. A game changer.",
+                url: "https://www.usegalileo.ai",
+                icon: "fa-layer-group",
+                color: "text-blue-400",
+                tags: ["Figma", "UI/UX", "Text-to-UI"]
+            },
+            {
+                name: "Relume",
+                category: "design",
+                description: "Build sitemaps and wireframes in minutes. Export directly to Figma or Webflow.",
+                url: "https://www.relume.io",
+                icon: "fa-sitemap",
+                color: "text-white",
+                tags: ["Wireframe", "Webflow", "Site Builder"]
+            },
+            {
+                name: "Magician",
+                category: "design",
+                description: "A magical Figma plugin that generates icons, copies, and images inside your canvas.",
+                url: "https://magician.design",
+                icon: "fa-wand-magic-sparkles",
+                color: "text-purple-500",
+                tags: ["Plugin", "Icons", "Copy"]
+            },
+            {
+                name: "Musho",
+                category: "design",
+                description: "Your AI design assistant. Turns prompts into gorgeous landing pages in Figma instantly.",
+                url: "https://musho.ai",
+                icon: "fa-pen-ruler",
+                color: "text-yellow-400",
+                tags: ["Landing Page", "Assistant", "Fast"]
+            },
+            {
+                name: "Uizard",
+                category: "design",
+                description: "Scan your messy sketches and turn them into editable UI designs automatically.",
+                url: "https://uizard.io",
+                icon: "fa-mobile-screen",
+                color: "text-indigo-500",
+                tags: ["Scanning", "Wireframe", "App Design"]
+            },
+            {
+                name: "Builder.io",
+                category: "design",
+                description: "Turn your Figma designs into clean, production-ready code (React, Vue, Svelte, etc).",
+                url: "https://www.builder.io",
+                icon: "fa-code",
+                color: "text-green-400",
+                tags: ["Figma-to-Code", "React", "Frontend"]
+            },
+
             // Image Generators
             {
                 name: "Midjourney v6",
@@ -803,7 +865,7 @@
         let currentFilter = 'all';
 
         // High Value Tools to pinning to Trending
-        const trendingIds = ['Predis.ai', 'Metricool', 'Hypefury', 'Descript', 'Copy.ai', 'ElevenLabs', 'Synthesia', 'Flick'];
+        const trendingIds = ['Galileo AI', 'Relume', 'Predis.ai', 'Metricool', 'Hypefury', 'Descript', 'Copy.ai', 'ElevenLabs', 'Synthesia', 'Flick'];
 
         function createCard(tool, index) {
             const card = document.createElement('div');
