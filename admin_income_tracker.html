@@ -248,6 +248,9 @@
                             <div>
                                 <label class="block text-xs font-bold text-slate-500 uppercase mb-3">Select Tool</label>
                                 <div class="grid grid-cols-2 gap-3">
+                                    <button onclick="selectTool('Article', this)"
+                                        class="social-tool bg-pink-500/20 border border-pink-500/50 text-white p-3 rounded-lg text-sm text-left hover:bg-pink-500/30 transition-all font-bold">New
+                                        Article 🚨</button>
                                     <button onclick="selectTool('Lovable', this)"
                                         class="social-tool active bg-brand-500/20 border border-brand-500/50 text-white p-3 rounded-lg text-sm text-left transition-all">Lovable</button>
                                     <button onclick="selectTool('Cursor', this)"
@@ -494,6 +497,7 @@
         function generateTweet() {
             // Keep existing Tweet Logic or Expand
             const msgs = {
+                'Article': "Cursor vs Lovable vs Bolt.new 🚨\n\nI spent 48 hours building the same app with all three.\n\nOne felt like the future. One was a mess.\n\nSee the winner: https://one-ai-stop.vercel.app/blog_ai_coding_battle.html #AI #Code",
                 'Lovable': "Describe it. Build it. 🚀\n\nLovable AI turns prompts into full-stack web apps in seconds.\n\nTry it: https://one-ai-stop.vercel.app #NoCode",
                 'Cursor': "VS Code killer? 🧐\n\nCursor AI wrote 80% of my code today. Productivity is through the roof.\n\nGet it: https://one-ai-stop.vercel.app #Dev",
                 'Descript': "Editing video by deleting text is magic. ✨\n\nDescript is a must-have for creators.\n\nLink: https://one-ai-stop.vercel.app",
