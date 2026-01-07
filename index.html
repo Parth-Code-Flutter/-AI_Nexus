@@ -555,9 +555,10 @@
                 category: "social",
                 description: "Complete social media automation. Generates posts, carousels, and videos from text.",
                 url: "https://predis.ai?ref=oneaistop",
-                icon: "fa-share-nodes",
-                color: "text-purple-500",
-                tags: ["Automation", "Carousels", "Ads"]
+                icon: "fa-fire",
+                color: "text-orange-500",
+                tags: ["Trending", "Automation", "Ads"],
+                featured: true
             },
 
             // Audio/Voice
@@ -802,7 +803,7 @@
         let currentFilter = 'all';
 
         // High Value Tools to pinning to Trending
-        const trendingIds = ['Metricool', 'Hypefury', 'Descript', 'Copy.ai', 'ElevenLabs', 'Synthesia', 'Flick'];
+        const trendingIds = ['Predis.ai', 'Metricool', 'Hypefury', 'Descript', 'Copy.ai', 'ElevenLabs', 'Synthesia', 'Flick'];
 
         function createCard(tool, index) {
             const card = document.createElement('div');
@@ -847,6 +848,13 @@
         function renderTools(toolsToRender) {
             toolsGrid.innerHTML = '';
             if (trendingGrid) trendingGrid.innerHTML = '';
+
+            // SORT: Trending First
+            toolsToRender.sort((a, b) => {
+                const isATrending = trendingIds.includes(a.name);
+                const isBTrending = trendingIds.includes(b.name);
+                return (isATrending === isBTrending) ? 0 : isATrending ? -1 : 1;
+            });
 
             // Handle No Results
             if (toolsToRender.length === 0) {
