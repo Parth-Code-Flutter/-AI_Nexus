@@ -256,19 +256,24 @@
             // Generates Reliable Placeholder Images (Picsum) based on seed
             // This is a DEMO. For real search results, you need a Pexels/Unsplash API Key.
             const images = [];
-            for (let i = 0; i < 12; i++) {
+
+            // Increased to 50 for endless scrolling feel
+            for (let i = 0; i < 50; i++) {
                 // We use a seed to make it consistent but different for each item
                 // Use a simple random seed if term is empty or just use index
                 const seed = (term ? term.length : 1) + i * 55;
                 const width = 400;
                 const height = i % 2 === 0 ? 600 : 400; // Create masonry effect
 
+                // Intelligent Premium Injection: Every 8th card (roughly)
+                const isPremium = (i + 1) % 8 === 0;
+
                 images.push({
                     id: i,
                     url: `https://picsum.photos/seed/${seed}/800/1200`, // High Res for modal
                     src: `https://picsum.photos/seed/${seed}/${width}/${height}`, // Thumbnail
                     photographer: "Stock Contributor",
-                    premium: i === 1 || i === 4 // Fake premium slots
+                    premium: isPremium
                 });
             }
             return images;
