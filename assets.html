@@ -253,16 +253,21 @@
         }
 
         function generateMockImages(term) {
-            // Generates Unsplash URLs based on the term
+            // Generates Reliable Placeholder Images (Picsum) based on seed
+            // This is a DEMO. For real search results, you need a Pexels/Unsplash API Key.
             const images = [];
             for (let i = 0; i < 12; i++) {
+                // We use a seed to make it consistent but different for each item
+                // Use a simple random seed if term is empty or just use index
+                const seed = (term ? term.length : 1) + i * 55;
+                const width = 400;
+                const height = i % 2 === 0 ? 600 : 400; // Create masonry effect
+
                 images.push({
                     id: i,
-                    url: `https://source.unsplash.com/800x${600 + (i % 3) * 100}/?${term},${i}`,
-                    // Unsplash Source is deprecated/unreliable, let's use a better placeholder service or real URLs
-                    // Fallback to picsum for reliability in demo
-                    src: `https://image.pollinations.ai/prompt/${term}%20${i}?width=400&height=${400 + (i % 3) * 100}&nologo=true`,
-                    photographer: "AI Generator",
+                    url: `https://picsum.photos/seed/${seed}/800/1200`, // High Res for modal
+                    src: `https://picsum.photos/seed/${seed}/${width}/${height}`, // Thumbnail
+                    photographer: "Stock Contributor",
                     premium: i === 1 || i === 4 // Fake premium slots
                 });
             }
