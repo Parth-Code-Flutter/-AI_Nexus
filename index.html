@@ -1131,6 +1131,77 @@
             </div>
         </div>
     </footer>
+
+    <!-- Spotlight Effect Script -->
+    <script>
+        const body = document.body;
+        // Listen to mouse move on body
+        body.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+
+            // Update global spotlight position
+            body.style.setProperty('--mouse-x', `${x}px`);
+            body.style.setProperty('--mouse-y', `${y}px`);
+
+            // Update card-specific spotlight (for borders)
+            document.querySelectorAll('.glass-card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardX = x - rect.left;
+                const cardY = y - rect.top;
+                card.style.setProperty('--card-x', `${cardX}px`);
+                card.style.setProperty('--card-y', `${cardY}px`);
+
+                // Add border-glow class dynamically for specificity if needed, 
+                // but CSS ::after handles it well.
+            });
+        });
+    </script>
+    <style>
+        /* Global Spotlight (Background Glow) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99, 102, 241, 0.05), transparent 40%);
+            pointer-events: none;
+            z-index: 999;
+            /* On top of everything but pointer-events none */
+            mix-blend-mode: screen;
+        }
+
+        /* Card Border Glow */
+        .glass-card {
+            position: relative;
+            /* Ensure ::after is positioned relative to card */
+        }
+
+        .glass-card::after {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            /* Hug the border */
+            border-radius: 16px;
+            /* Match card radius */
+            padding: 1px;
+            /* Border width */
+            background: radial-gradient(400px circle at var(--card-x) var(--card-y), rgba(255, 255, 255, 0.4), transparent 40%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .glass-card:hover::after {
+            opacity: 1;
+        }
+    </style>
 </body>
 
 </html>
