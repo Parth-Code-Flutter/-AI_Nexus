@@ -1136,25 +1136,32 @@
     <script>
         const body = document.body;
         // Listen to mouse move on body
+        let ticking = false;
         body.addEventListener('mousemove', (e) => {
-            const x = e.clientX;
-            const y = e.clientY;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const x = e.clientX;
+                    const y = e.clientY;
 
-            // Update global spotlight position
-            body.style.setProperty('--mouse-x', `${x}px`);
-            body.style.setProperty('--mouse-y', `${y}px`);
+                    // Update global spotlight position
+                    body.style.setProperty('--mouse-x', `${x}px`);
+                    body.style.setProperty('--mouse-y', `${y}px`);
 
-            // Update card-specific spotlight (for borders)
-            document.querySelectorAll('.glass-card').forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const cardX = x - rect.left;
-                const cardY = y - rect.top;
-                card.style.setProperty('--card-x', `${cardX}px`);
-                card.style.setProperty('--card-y', `${cardY}px`);
+                    // Update card-specific spotlight (for borders)
+                    document.querySelectorAll('.glass-card').forEach(card => {
+                        const rect = card.getBoundingClientRect();
+                        const cardX = x - rect.left;
+                        const cardY = y - rect.top;
+                        card.style.setProperty('--card-x', `${cardX}px`);
+                        card.style.setProperty('--card-y', `${cardY}px`);
 
-                // Add border-glow class dynamically for specificity if needed, 
-                // but CSS ::after handles it well.
-            });
+                        // Add border-glow class dynamically for specificity if needed, 
+                        // but CSS ::after handles it well.
+                    });
+                    ticking = false;
+                });
+                ticking = true;
+            }
         });
     </script>
     <style>
