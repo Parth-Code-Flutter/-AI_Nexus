@@ -16,13 +16,13 @@ function showNewsletterModal() {
     const modalHTML = `
     <div id="newsletter-modal" class="fixed inset-0 z-[9999] flex items-center justify-center px-4 opacity-0 transition-opacity duration-500">
         <!-- Backdrop -->
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeNewsletter(false)"></div>
+        <div id="newsletter-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer"></div>
         
         <!-- Modal Content -->
         <div class="relative bg-[#0f172a] border border-white/10 rounded-2xl p-1 overflow-hidden shadow-2xl max-w-md w-full transform scale-95 transition-transform duration-300" id="newsletter-content">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-500 via-purple-500 to-pink-500"></div>
             
-            <button onclick="closeNewsletter(true)" class="absolute top-3 right-3 text-slate-400 hover:text-white transition-colors">
+            <button id="newsletter-close-btn" class="absolute top-3 right-3 text-slate-400 hover:text-white transition-colors p-2 z-50">
                 <i class="fa-solid fa-times text-xl"></i>
             </button>
 
@@ -51,6 +51,10 @@ function showNewsletterModal() {
 
     // Inject into body
     document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    // Attach Listeners Manually (More Reliable)
+    document.getElementById('newsletter-close-btn').addEventListener('click', () => closeNewsletter(true));
+    document.getElementById('newsletter-backdrop').addEventListener('click', () => closeNewsletter(false));
 
     // Trigger Animation (Next Tick)
     requestAnimationFrame(() => {
