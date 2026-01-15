@@ -108,7 +108,18 @@ function closeAfterSubmit() {
     // Save to LocalStorage immediately
     localStorage.setItem('newsletter_seen', 'true');
 
-    // Close modal after 1 second (gives time for new tab to open)
+    // Update Footer Form UI immediately
+    const footerForm = document.getElementById('footer-newsletter-form');
+    if (footerForm) {
+        footerForm.innerHTML = `
+            <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-4 flex items-center justify-center gap-3 text-green-400">
+                <i class="fa-solid fa-check-circle text-xl"></i>
+                <span class="font-bold">You're already on the list! 🚀</span>
+            </div>
+        `;
+    }
+
+    // Close modal after 1 second
     setTimeout(() => {
         closeNewsletter(true);
     }, 1000);
