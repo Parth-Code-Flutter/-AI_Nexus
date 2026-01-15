@@ -1,10 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if user has already seen the popup
-    if (localStorage.getItem('newsletter_seen') === 'true') {
+    // Check if user has already seen the popup (or subscribed)
+    const isSubscribed = localStorage.getItem('newsletter_seen') === 'true';
+
+    // Handle Footer Newsletter State
+    const footerForm = document.getElementById('footer-newsletter-form');
+    if (footerForm && isSubscribed) {
+        footerForm.innerHTML = `
+            <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-4 flex items-center justify-center gap-3 text-green-400">
+                <i class="fa-solid fa-check-circle text-xl"></i>
+                <span class="font-bold">You're already on the list! 🚀</span>
+            </div>
+        `;
+    }
+
+    if (isSubscribed) {
         return;
     }
 
-    // Delay for 3.5 seconds before showing
+    // Delay for 3.5 seconds before showing popup
     setTimeout(showNewsletterModal, 3500);
 });
 
