@@ -37,8 +37,14 @@ function showNewsletterModal() {
                 <h3 class="text-2xl font-bold text-white mb-2">Get the Top 1% of AI</h3>
                 <p class="text-slate-400 text-sm mb-6">Join 5,000+ creators. Get the best new AI tools, assets, and tutorials delivered to your inbox weekly. No spam.</p>
 
-                <form onsubmit="handleSubscribe(event)" class="space-y-3">
-                    <input type="email" required placeholder="name@example.com" class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-brand-500 transition-colors">
+                <form action="https://app.kit.com/forms/8976277/subscriptions" method="post" target="_blank" class="space-y-3" onsubmit="closeAfterSubmit()">
+                    <input type="email" name="email_address" required placeholder="name@example.com" class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-brand-500 transition-colors">
+                    
+                    <!-- Honeypot to prevent spam -->
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                        <input type="text" name="b_8976277_subscriptions" tabindex="-1" value="">
+                    </div>
+
                     <button type="submit" class="w-full bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white font-bold py-3 rounded-lg transition-all shadow-lg shadow-brand-500/25">
                         Join Free
                     </button>
@@ -85,26 +91,12 @@ function closeNewsletter(permanently) {
     }
 }
 
-function handleSubscribe(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button');
-    const originalText = btn.innerHTML;
+function closeAfterSubmit() {
+    // Save to LocalStorage immediately
+    localStorage.setItem('newsletter_seen', 'true');
 
-    // Simulate Loading
-    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
-
+    // Close modal after 1 second (gives time for new tab to open)
     setTimeout(() => {
-        // Success State
-        btn.innerHTML = '<i class="fa-solid fa-check"></i> Welcome Aboard!';
-        btn.classList.remove('from-brand-600', 'to-purple-600');
-        btn.classList.add('bg-green-500');
-
-        // Save to LocalStorage (So we never show it again)
-        localStorage.setItem('newsletter_seen', 'true');
-
-        // Close after 1.5s
-        setTimeout(() => {
-            closeNewsletter(true);
-        }, 1500);
+        closeNewsletter(true);
     }, 1000);
 }
