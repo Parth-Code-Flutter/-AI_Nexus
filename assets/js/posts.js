@@ -1,5 +1,16 @@
 const blogPosts = [
     {
+        id: "google-stitch-review",
+        title: "Google Stitch vs Galileo AI: The New King of UI Design? (2026)",
+        category: "Reviews",
+        date: "Jan 15, 2026",
+        readTime: "6 min read",
+        imageIcon: "fa-brands fa-google",
+        color: "text-blue-500",
+        description: "Google just dropped a bombshell design tool. We tested it against Galileo AI and Uizard. Here is the verdict.",
+        link: "blog_google_stitch_review.html"
+    },
+    {
         id: "cursor-vs-lovable",
         title: "Cursor vs Lovable vs Bolt: The Ultimate AI Coding Battle",
         category: "Reviews",
