@@ -201,6 +201,14 @@
                 <div class="inline-flex items-center p-2 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-xl shadow-2xl overflow-x-auto max-w-full scrollbar-hide"
                     id="categoryContainer">
 
+                    <button onclick="filterTools('saved')"
+                        class="category-btn group flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-300">
+                        <i class="fa-solid fa-bookmark group-hover:text-brand-400 transition-colors"></i> <span
+                            class="whitespace-nowrap">Saved</span>
+                    </button>
+
+                    <div class="w-px h-6 bg-white/5 mx-1 hidden sm:block"></div>
+
                     <button onclick="filterTools('all')"
                         class="category-btn group flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 bg-brand-600 text-white shadow-lg shadow-brand-500/20 active-tab">
                         <i class="fa-solid fa-layer-group"></i> <span class="whitespace-nowrap">All Tools</span>
@@ -863,6 +871,53 @@
                 icon: "fa-rotate",
                 color: "text-green-500",
                 tags: ["Paraphrasing", "School", "Writing"]
+            },
+
+            // New Additions
+            {
+                name: "AI Cut",
+                category: "video",
+                description: "Turn long videos into viral shorts instantly with AI-powered editing.",
+                url: "https://www.aicut.pro/",
+                icon: "fa-scissors",
+                color: "text-red-500",
+                tags: ["Shorts", "Editing", "Viral"]
+            },
+            {
+                name: "Gemini Canvas",
+                category: "productivity",
+                description: "A new interface for collaborating with Gemini on complex writing and coding projects.",
+                url: "https://gemini.google/overview/canvas/",
+                icon: "fa-pen-to-square",
+                color: "text-blue-500",
+                tags: ["Google", "Writing", "Collaboration"]
+            },
+            {
+                name: "Pomelli",
+                category: "design",
+                description: "An experimental creative tool from Google Labs for visual exploration.",
+                url: "https://labs.google.com/pomelli/about/",
+                icon: "fa-flask",
+                color: "text-purple-500",
+                tags: ["Google Labs", "Experimental", "Creative"]
+            },
+            {
+                name: "NotebookLM",
+                category: "productivity",
+                description: "Google's AI notebook. Upload docs and instant summaries or generate audio conversations.",
+                url: "https://notebooklm.google/",
+                icon: "fa-book-open",
+                color: "text-green-500",
+                tags: ["Research", "Notes", "Google"]
+            },
+            {
+                name: "Google AI Studio",
+                category: "coding",
+                description: "Build generative AI apps quickly with Gemini models. The fastest way to prototype.",
+                url: "https://aistudio.google.com/",
+                icon: "fa-code",
+                color: "text-blue-600",
+                tags: ["Developers", "API", "Gemini"]
             }
         ];
 
@@ -872,14 +927,45 @@
         const searchInput = document.getElementById('searchInput');
         let currentFilter = 'all';
 
+        // Initialize Bookmarks
+        let bookmarks = JSON.parse(localStorage.getItem('aiToolsBookmarks')) || [];
+
         // High Value Tools to pinning to Trending
         const trendingIds = ['Stitch', 'Uizard', 'Relume', 'Predis.ai', 'Metricool', 'Hypefury', 'Descript', 'Copy.ai', 'ElevenLabs', 'Synthesia', 'Flick'];
+
+        function toggleBookmark(toolName, event) {
+            event.stopPropagation();
+            const index = bookmarks.indexOf(toolName);
+
+            if (index === -1) {
+                bookmarks.push(toolName);
+                // Animate
+                const icon = event.currentTarget.querySelector('i');
+                icon.classList.remove('fa-regular');
+                icon.classList.add('fa-solid', 'text-brand-400', 'scale-125');
+                setTimeout(() => icon.classList.remove('scale-125'), 200);
+            } else {
+                bookmarks.splice(index, 1);
+                // Animate
+                const icon = event.currentTarget.querySelector('i');
+                icon.classList.remove('fa-solid', 'text-brand-400');
+                icon.classList.add('fa-regular');
+            }
+
+            localStorage.setItem('aiToolsBookmarks', JSON.stringify(bookmarks));
+
+            // If in Saved view, re-render immediately to remove unbookmarked
+            if (currentFilter === 'saved') {
+                renderTools(tools.filter(t => bookmarks.includes(t.name)));
+            }
+        }
 
         function createCard(tool, index) {
             const card = document.createElement('div');
             // Add golden border for trending tools
             const isTrending = trendingIds.includes(tool.name);
             const borderClass = isTrending ? 'border-orange-500/30 shadow-orange-500/10' : 'border-white/5';
+            const isBookmarked = bookmarks.includes(tool.name);
 
             card.className = `glass-card rounded-2xl p-6 hover:bg-slate-800/80 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-500/10 group cursor-pointer border-t ${borderClass}`;
             card.onclick = () => window.open(tool.url, '_blank');
@@ -902,11 +988,16 @@
                         <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-center text-2xl ${tool.color} group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid ${tool.icon}"></i>
                         </div>
-                        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-brand-500 transition-colors">
-                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        <div class="flex gap-2 relative z-20">
+                            <button onclick="toggleBookmark('${tool.name}', event)" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-colors border border-white/5">
+                                <i class="${isBookmarked ? 'fa-solid text-brand-400' : 'fa-regular'} fa-bookmark text-xs transition-transform duration-200"></i>
+                            </button>
+                            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-brand-500 transition-colors border border-white/5">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-400 transition-colors">${tool.name}</h3>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-400 transition-colors line-clamp-1">${tool.name}</h3>
                     <p class="text-slate-400 text-sm mb-4 line-clamp-2 h-10 leading-relaxed">${tool.description}</p>
                     <div class="flex flex-wrap gap-2 mt-auto">
                         ${tagsHtml}
@@ -919,27 +1010,27 @@
             toolsGrid.innerHTML = '';
             if (trendingGrid) trendingGrid.innerHTML = '';
 
-            // SORT: Trending First
-            toolsToRender.sort((a, b) => {
-                const isATrending = trendingIds.includes(a.name);
-                const isBTrending = trendingIds.includes(b.name);
-                return (isATrending === isBTrending) ? 0 : isATrending ? -1 : 1;
-            });
-
             // Handle No Results
             if (toolsToRender.length === 0) {
                 document.getElementById('noResults').classList.remove('hidden');
                 if (trendingSection) trendingSection.classList.add('hidden');
                 const mainTitle = document.getElementById('mainGridTitle');
                 if (mainTitle) mainTitle.parentElement.style.display = 'none';
+
+                // Customize message for Saved view
+                if (currentFilter === 'saved') {
+                    document.querySelector('#noResults h3').innerText = "No saved tools yet";
+                    document.querySelector('#noResults p').innerText = "Click the bookmark icon on any tool to save it here.";
+                } else {
+                    document.querySelector('#noResults h3').innerText = "No tools found";
+                    document.querySelector('#noResults p').innerText = "Try searching for a different term or category.";
+                }
                 return;
             }
 
             document.getElementById('noResults').classList.add('hidden');
 
-            // Strategy:
-            // If viewing "All" AND searching is empty, show Trending Section separately.
-
+            // 1. ALL TOOLS VIEW (Default)
             if (currentFilter === 'all' && searchInput.value === '' && trendingSection) {
                 trendingSection.classList.remove('hidden');
                 const mainTitle = document.getElementById('mainGridTitle');
@@ -948,23 +1039,52 @@
                     mainTitle.parentElement.style.display = 'flex';
                 }
 
-                // 1. Render Trending Grid
-                const trendingTools = tools.filter(t => trendingIds.includes(t.name));
-                trendingTools.forEach((tool, index) => {
+                // Trending
+                toolsToRender.filter(t => trendingIds.includes(t.name)).forEach((tool, index) => {
                     trendingGrid.appendChild(createCard(tool, index));
                 });
 
-                // 2. Render Main Grid (Exclude trending to avoid duplicates)
-                const mainTools = tools.filter(t => !trendingIds.includes(t.name));
-                mainTools.forEach((tool, index) => {
+                // Main Grid (Rest)
+                toolsToRender.filter(t => !trendingIds.includes(t.name)).forEach((tool, index) => {
                     toolsGrid.appendChild(createCard(tool, index));
                 });
 
-            } else {
-                // Filtered view: Hide distinct trending section, show everything in main grid
+            }
+            // 2. SAVED VIEW (Grouped by Category)
+            else if (currentFilter === 'saved') {
                 if (trendingSection) trendingSection.classList.add('hidden');
                 const mainTitle = document.getElementById('mainGridTitle');
-                if (mainTitle) mainTitle.parentElement.style.display = 'none'; // Hide "All Tools" header when searching/filtering
+                if (mainTitle) mainTitle.parentElement.style.display = 'none';
+
+                // Group by Category
+                const categories = {};
+                toolsToRender.forEach(tool => {
+                    if (!categories[tool.category]) categories[tool.category] = [];
+                    categories[tool.category].push(tool);
+                });
+
+                Object.keys(categories).sort().forEach(cat => {
+                    // Header
+                    const header = document.createElement('div');
+                    header.className = 'col-span-full mt-8 first:mt-0 flex items-center gap-3 animate-fade-in';
+                    header.innerHTML = `
+                        <div class="h-6 w-1 bg-brand-500 rounded-full"></div>
+                        <h2 class="text-2xl font-bold text-white capitalize">${cat}</h2>
+                    `;
+                    toolsGrid.appendChild(header);
+
+                    // Tools for this category
+                    categories[cat].forEach((tool, i) => {
+                        toolsGrid.appendChild(createCard(tool, i));
+                    });
+                });
+
+            }
+            // 3. FILTERED VIEW (Standard Grid)
+            else {
+                if (trendingSection) trendingSection.classList.add('hidden');
+                const mainTitle = document.getElementById('mainGridTitle');
+                if (mainTitle) mainTitle.parentElement.style.display = 'none';
 
                 toolsToRender.forEach((tool, index) => {
                     toolsGrid.appendChild(createCard(tool, index));
@@ -995,6 +1115,9 @@
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.classList.remove('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/20');
                 btn.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-white/5');
+                // Handle special "All Tools" active state removal
+                btn.classList.remove('active-tab');
+
                 if (btn.innerText.includes('Free')) {
                     btn.classList.add('text-green-400/90', 'hover:bg-green-500/10');
                     btn.classList.remove('text-slate-400');
@@ -1003,9 +1126,9 @@
 
             const activeBtn = event.currentTarget;
             activeBtn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-white/5', 'text-green-400/90', 'hover:bg-green-500/10');
-            activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/20');
+            activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/20', 'active-tab');
 
-            // Update Sub-filters
+            // Update Sub-filters (Note: Saved view has no sub-filters for now)
             updateSubFilters(category);
 
             filterAndRender();
@@ -1061,6 +1184,8 @@
 
                 if (currentFilter === 'all') {
                     matchesCategory = true;
+                } else if (currentFilter === 'saved') {
+                    matchesCategory = bookmarks.includes(tool.name);
                 } else if (currentFilter === 'free') {
                     matchesCategory = tool.tags.some(tag => tag.toLowerCase() === 'free');
                 } else {
